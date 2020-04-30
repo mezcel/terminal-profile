@@ -1,0 +1,2 @@
+install.bat eol=crlf
+install.ps1 eol=crlf

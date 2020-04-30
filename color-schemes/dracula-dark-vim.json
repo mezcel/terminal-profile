@@ -1,0 +1,22 @@
+{
+	"name"          : "Dracula Dark - Vim",
+	"background"    : "#272935",
+	"black"         : "#21222C",
+	"blue"          : "#61475a", // c comments
+	"cyan"          : "#8BE9FD",
+	"foreground"    : "#b88ec0",
+	"green"         : "#50FA7B",
+	"purple"        : "#84b4d4",
+	"red"           : "#b9a150",
+	"white"         : "#3d35a3",
+	"yellow"        : "#FFB86C",
+	"brightBlack"   : "#6272A4",
+	"brightBlue"    : "#D6ACFF",
+	"brightCyan"    : "#A4FFFF",
+	"brightGreen"   : "#69FF94",
+	"brightPurple"  : "#FF92DF",
+	"brightRed"     : "#FF6E6E",
+	"brightWhite"   : "#F8F8F2",
+	"brightYellow"  : "#FFFFA5",
+	"cursorColor"   : "#FFF"
+}
