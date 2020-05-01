@@ -9,7 +9,7 @@ function closeWT() {
     $wtProcess = Get-Process 'WindowsTerminal' -ErrorAction SilentlyContinue
 
     if ( $wtProcess ) {
-        Write-Host "Closeing Windows Termainl" -ForegroundColor Magenta
+        Write-Host "Closing Windows Terminal" -ForegroundColor Magenta
         ## try to close gracefully first
         $wtProcess.CloseMainWindow()
 
