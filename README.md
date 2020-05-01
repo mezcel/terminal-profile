@@ -14,7 +14,7 @@ This is a decorative yet minimalistic scheme bundle for [Windows Terminal]( http
     ```diff
     IMPORTANT:
     - DO NOT run scripts within Windows Terminal itself.
-    - It will close it self and terminate the script. ( no harm, no foul )
+    - It will close itself and terminate the script. ( no harm, no foul )
     ```
 
 ### Manual Install ( safe )
