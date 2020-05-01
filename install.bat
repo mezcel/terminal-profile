@@ -58,3 +58,8 @@ ECHO :: Step 3. Copy and backup the settings.json file.
     ECHO :: Copy
     copy %sourceLS% "%destinationLS%\"
     ECHO :: done.
+
+:: Confirmation display
+ECHO :: Check: %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe
+ECHO ::      \RemoteState and \LocalState
+ECHO.
