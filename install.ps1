@@ -4,10 +4,6 @@
 ## source: https://github.com/mezcel/terminal-profile/install.ps1
 ##
 
-## Exit App as soon as it runs
-## This script is not tested yet
-#Exit
-
 ## Close any running Windows Terminal Sessions
 function closeWT() {
     $wtProcess = Get-Process 'WindowsTerminal' -ErrorAction SilentlyContinue
