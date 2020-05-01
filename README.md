@@ -6,7 +6,7 @@ This is a decorative yet minimalistic scheme bundle for [Windows Terminal]( http
 
 ## 2.0 Install
 
-### Installers ( wip )
+### Installers ( scripts )
 
 * ```CD``` into wherever this repo is on the computer.
 * From within ```terminal-profile```'s root directory, run either: [.\install.ps1](install.ps1) or [.\install.bat](install.bat).
@@ -17,7 +17,7 @@ This is a decorative yet minimalistic scheme bundle for [Windows Terminal]( http
     - It will close itself and terminate the script. ( no harm, no foul )
     ```
 
-### Manual Install ( safe )
+### Manual Install ( drag-n-drop )
 
 * [Install multimedia graphics](RoamingState/README.md)
 * [Copy my configuration settings](LocalState/README.md)
