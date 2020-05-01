@@ -11,12 +11,11 @@ This is a decorative yet minimalistic scheme bundle for [Windows Terminal]( http
 * ```CD``` into wherever this repo is on the computer.
 * From within ```terminal-profile```'s root directory, run either: [.\install.ps1](install.ps1) or [.\install.bat](install.bat).
 
-```diff
-IMPORTANT:
-- Installer scripts will abort if ran. 
-- They have not been live tested yet, and they are just place holder algorithms. 
-- I will test it later when I have finalized the default customizations.
-```
+    ```diff
+    IMPORTANT:
+    - DO NOT run scripts within Windows Terminal itself.
+    - It will close it self and terminate the script.
+    ```
 
 ### Manual Install ( safe )
 
