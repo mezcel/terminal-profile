@@ -71,6 +71,6 @@ Manually copy the ```.json``` text and paste it into Terminal's ```settings.json
 
 Optimized for Vim's C coloring defaults.
 
-* [Dracula Dark - Vim]()
-* [Dracula Light - Vim]()
-* [Nord - Vim]()
+* [Dracula Dark - Vim]( dracula-dark-vim.json )
+* [Dracula Light - Vim]( dracula-light-vim.json )
+* [Nord - Vim]( nord-vim.json )
