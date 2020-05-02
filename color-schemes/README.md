@@ -53,7 +53,15 @@ Manually copy the ```.json``` text and paste it into Terminal's ```settings.json
     }  
     ```
 
-## Community Themes:
+## Themes:
+
+### My Themes
+
+My custom themes optimized for Vim's C syntax, folds, and highlighting, coloring defaults.
+
+* [Holy Water Dark]( holy-water-dark.json ) - A forked modification of [Dracula]( https://draculatheme.com/windows-terminal )
+* [Holy Water Light]( holy-water-light.json ) - An inverse of HWD
+* [Nord - Vim]( nord-vim.json ) - Just [Nord]( https://compiledexperience.com/blog/posts/windows-terminal-nord ), touched up a bit
 
 ### Community themes
 
@@ -67,10 +75,3 @@ Manually copy the ```.json``` text and paste it into Terminal's ```settings.json
 * [terminalsplash]( https://terminalsplash.com/ )
 * [ColorTool]( https://github.com/microsoft/terminal/releases/tag/1904.29002 )
 
-### My Themes
-
-My custom thememes optimized for Vim's C coloring defaults.
-
-* [Holy Water Dark]( holy-water-dark.json ) - A forked modification Dracula
-* [Holy Water Light]( holy-water-light.json ) - An inverse of HWL
-* [Nord - Vim]( nord-vim.json ) - Just Nord touched up a bit
