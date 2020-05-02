@@ -69,8 +69,8 @@ Manually copy the ```.json``` text and paste it into Terminal's ```settings.json
 
 ### My Themes
 
-Optimized for Vim's C coloring defaults.
+My custom thememes optimized for Vim's C coloring defaults.
 
-* [Dracula Dark - Vim]( dracula-dark-vim.json )
-* [Dracula Light - Vim]( dracula-light-vim.json )
-* [Nord - Vim]( nord-vim.json )
+* [Holy Water Dark]( holy-water-dark.json ) - A forked modification Dracula
+* [Holy Water Light]( holy-water-light.json ) - An inverse of HWL
+* [Nord - Vim]( nord-vim.json ) - Just Nord touched up a bit

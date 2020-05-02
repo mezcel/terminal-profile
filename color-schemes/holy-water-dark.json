@@ -1,8 +1,8 @@
 {
-	"name"          : "Dracula Dark - Vim",
+	"name"          : "Holy Water Dark",
 	"background"    : "#272935",
 	"black"         : "#21222C",
-	"blue"          : "#61475a", // c comments
+	"blue"          : "#61475a",
 	"cyan"          : "#8BE9FD",
 	"foreground"    : "#b88ec0",
 	"green"         : "#50FA7B",

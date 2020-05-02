@@ -30,6 +30,20 @@
     "profiles": {
         "defaults": {},
         "list": [
+            {   // Git Bash
+                "guid"                          : "{680507ee-fd3b-467e-a55b-1bc95b40a025}",
+                "hidden"                        : false,
+                "name"                          : "Git Bash",
+                "commandline"                   : "C:/Program Files/Git/usr/bin/bash.exe --login",
+                "icon"                          : "C:/Program Files/Git/mingw64/share/git/git-for-windows.ico",
+                "startingDirectory"             : "%USERPROFILE%",
+                "backgroundImage"               : "ms-appdata:///roaming/backgrounds/git-orange.png",
+                "backgroundImageAlignment"      : "bottomRight",
+                "backgroundImageStretchMode"    : "none",
+                "backgroundImageOpacity"        : 0.20,
+                "colorScheme"                   : "Violet Light",
+                "cursorShape"                   : "emptyBox"
+            },
             {   // PS
                 "guid"                          : "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "name"                          : "Windows PowerShell",
@@ -53,20 +67,6 @@
                 "backgroundImageStretchMode"    : "none",
                 "backgroundImageOpacity"        : 0.20,
                 "cursorShape"                   : "vintage"
-            },
-            {   // Git Bash
-                "guid"                          : "{680507ee-fd3b-467e-a55b-1bc95b40a025}",
-                "hidden"                        : false,
-                "name"                          : "Git Bash",
-                "commandline"                   : "C:/Program Files/Git/usr/bin/bash.exe --login",
-                "icon"                          : "C:/Program Files/Git/mingw64/share/git/git-for-windows.ico",
-                "startingDirectory"             : "%USERPROFILE%",
-                "backgroundImage"               : "ms-appdata:///roaming/backgrounds/git-orange.png",
-                "backgroundImageAlignment"      : "bottomRight",
-                "backgroundImageStretchMode"    : "none",
-                "backgroundImageOpacity"        : 0.20,
-                "colorScheme"                   : "Violet Light - GitBash",
-                "cursorShape"                   : "emptyBox"
             },
             {   // VS PS
                 "commandline": "powershell.exe -noe -c \"&{Import-Module \"\"\"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/Tools/Microsoft.VisualStudio.DevShell.dll\"\"\"; Enter-VsDevShell 1e3ca9fe}\"",
@@ -101,7 +101,7 @@
                 "hidden"                        : false,
                 "name"                          : "Debian",
                 "source"                        : "Windows.Terminal.Wsl",
-                "colorScheme"                   : "Dracula Light - Vim",
+                "colorScheme"                   : "Holy Water Light",
                 //"backgroundImage"               : "ms-appdata:///roaming/backgrounds/debian-white.png",
                 "backgroundImage"               : "ms-appdata:///roaming/backgrounds/debian-red-smaller.png",
                 //"backgroundImage"               : "ms-appdata:///roaming/backgrounds/debian-black.png",
@@ -232,9 +232,9 @@
             "yellow"        : "#ebcb8b",
             "cursorColor"   : "#74a3d8"
         },
-        {   /* Dracula Dark - for VIM * Based on Dracula feel */
+        {   /* Holy Water Dark - for VIM * Based on Dracula feel */
         
-            "name"          : "Dracula Dark - Vim",
+            "name"          : "Holy Water Dark",
             "background"    : "#272935",
             "black"         : "#21222C",
             "blue"          : "#61475a", // c comments
@@ -255,9 +255,9 @@
             "brightYellow"  : "#FFFFA5",
             "cursorColor"   : "#FFF"
         },
-        {   /* Dracula Light - for VIM * based on the Dracula feel */
+        {   /* Holy Water Light - for VIM * based on the Dracula feel */
         
-            "name"          : "Dracula Light - Vim",
+            "name"          : "Holy Water Light",
             "background"    : "#e8e9f0",
             "black"         : "#3d3e4d",
             "blue"          : "#ac0d84",
@@ -278,9 +278,9 @@
             "brightYellow"  : "#FFFFA5",
             "cursorColor"   : "#710275"
         },
-        {   /* GitBash - https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/windowsterminal/Violet%20Light.json */
+        {   /* Violet Light - https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/windowsterminal/Violet%20Light.json */
         
-            "name"          : "Violet Light - GitBash",
+            "name"          : "Violet Light",
             "black"         : "#56595c",
             "red"           : "#c94c22",
             "green"         : "#85981c",
