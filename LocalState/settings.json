@@ -24,8 +24,8 @@
 
 {
     "$schema"           : "https://aka.ms/terminal-profiles-schema",
-    "defaultProfile"    : "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",     /* WLS */
-    //"defaultProfile"    : "{680507ee-fd3b-467e-a55b-1bc95b40a025}",   /* Git Bash */
+    //"defaultProfile"    : "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",     /* WLS */
+    "defaultProfile"    : "{680507ee-fd3b-467e-a55b-1bc95b40a025}",   /* Git Bash */
 
     "profiles": {
         "defaults": {},
@@ -41,8 +41,22 @@
                 "backgroundImageAlignment"      : "bottomRight",
                 "backgroundImageStretchMode"    : "none",
                 "backgroundImageOpacity"        : 0.20,
-                "colorScheme"                   : "Violet Light",
+                //"colorScheme"                   : "Violet Light",
+                "colorScheme"                   : "Dracula",
                 "cursorShape"                   : "emptyBox"
+            },
+            {   // Debian
+                "guid"                          : "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
+                "hidden"                        : false,
+                "name"                          : "Debian",
+                "source"                        : "Windows.Terminal.Wsl",
+                "colorScheme"                   : "Shinigami Dark",
+                "backgroundImage"               : "ms-appdata:///roaming/backgrounds/debian-white.png",
+                "backgroundImageAlignment"      : "center",
+                "backgroundImageStretchMode"    : "none",
+                "backgroundImageOpacity"        : 0.10,
+                "icon"                          : "ms-appdata:///roaming/icons/debian.ico",
+                "cursorShape"                   : "filledBox"
             },
             {   // PS
                 "guid"                          : "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -95,22 +109,6 @@
                 "backgroundImageStretchMode"    : "none",
                 "backgroundImageOpacity"        : 0.20,
                 "cursorShape"                   : "vintage"
-            },
-            {   // Debian
-                "guid"                          : "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
-                "hidden"                        : false,
-                "name"                          : "Debian",
-                "source"                        : "Windows.Terminal.Wsl",
-                "colorScheme"                   : "Holy Water Light",
-                //"backgroundImage"               : "ms-appdata:///roaming/backgrounds/debian-white.png",
-                "backgroundImage"               : "ms-appdata:///roaming/backgrounds/debian-red-smaller.png",
-                //"backgroundImage"               : "ms-appdata:///roaming/backgrounds/debian-black.png",
-                //"backgroundImageAlignment"      : "center",
-                "backgroundImageAlignment"      : "bottomRight",
-                "backgroundImageStretchMode"    : "none",
-                "backgroundImageOpacity"        : 0.30,
-                "icon"                          : "ms-appdata:///roaming/icons/debian.ico",
-                "cursorShape"                   : "filledBox"
             },
             {   // Azure
                 "guid"      : "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -232,9 +230,9 @@
             "yellow"        : "#ebcb8b",
             "cursorColor"   : "#74a3d8"
         },
-        {   /* Holy Water Dark - for VIM * Based on Dracula feel */
+        {   /* Lucius Lilac Dark - for VIM * forked from Dracula */
         
-            "name"          : "Holy Water Dark",
+            "name"          : "Lucius Lilac Dark",
             "background"    : "#272935",
             "black"         : "#21222C",
             "blue"          : "#61475a", // c comments
@@ -255,9 +253,32 @@
             "brightYellow"  : "#FFFFA5",
             "cursorColor"   : "#FFF"
         },
-        {   /* Holy Water Light - for VIM * based on the Dracula feel */
+        {   /* Shinigami Dark - for VIM * Black Grey Red Blue */
         
-            "name"          : "Holy Water Light",
+            "name"          : "Shinigami Dark",
+            "background"    : "#262626",
+            "black"         : "#21222C",
+            "blue"          : "#61475a", // c comments
+            "cyan"          : "#8BE9FD",
+            "foreground"    : "#9e8888", // fun and var
+            "green"         : "#dd4f4f", // data type
+            "purple"        : "#5a8aaa", // include
+            "red"           : "#8480bb", // num
+            "white"         : "#636091", // highlight
+            "yellow"        : "#FFB86C",
+            "brightBlack"   : "#6272A4",
+            "brightBlue"    : "#d14242", // dir path
+            "brightCyan"    : "#A4FFFF",
+            "brightGreen"   : "#c5997b", // PS1
+            "brightPurple"  : "#FF92DF",
+            "brightRed"     : "#FF6E6E",
+            "brightWhite"   : "#F8F8F2",
+            "brightYellow"  : "#FFFFA5",
+            "cursorColor"   : "#ca5151"
+        },
+        {   /* Apothecary White Light - for VIM * light grey whiteish blue */
+        
+            "name"          : "Apothecary White Light",
             "background"    : "#e8e9f0",
             "black"         : "#3d3e4d",
             "blue"          : "#ac0d84",
@@ -300,6 +321,29 @@
             "background"    : "#fcf4dc",
             "foreground"    : "#536870",
             "cursorColor"   : "#536870"
+        },
+        {   /* Nocturne Green Dark - for Vim */
+
+            "name"          : "Nocturne Green Dark",
+            "black"         : "#112616",
+            "red"           : "#808851", // num 
+            "green"         : "#2f7e25",
+            "yellow"        : "#717f24",
+            "blue"          : "#6d5922", // comments
+            "purple"        : "#7fa009", // include
+            "cyan"          : "#327f77",
+            "white"         : "#647d75",
+            "brightBlack"   : "#3c4812",
+            "brightRed"     : "#e08009",
+            "brightGreen"   : "#4d7748", // PS1
+            "brightYellow"  : "#bde000",
+            "brightBlue"    : "#7e4c12", // Dir
+            "brightPurple"  : "#0058e0",
+            "brightCyan"    : "#00e0c4",
+            "brightWhite"   : "#73fa91",
+            "background"    : "#0f1610",
+            "foreground"    : "#637d75",
+            "cursorColor"   : "#3eb944"
         }
         
     ],

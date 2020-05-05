@@ -59,8 +59,9 @@ Manually copy the ```.json``` text and paste it into Terminal's ```settings.json
 
 My custom themes optimized for Vim's C syntax, folds, and highlighting, coloring defaults.
 
-* [Holy Water Dark]( holy-water-dark.json ) - A forked modification of [Dracula]( https://draculatheme.com/windows-terminal )
-* [Holy Water Light]( holy-water-light.json ) - An inverse of HWD
+* [Lucius Lilac Dark]( lucius-lilac-dark.json ) - A forked modification of [Dracula]( https://draculatheme.com/windows-terminal )
+* [Apothecary White Light]( apothecary-white-light.json )
+* [Nocturne Green Dark]( nocturne-green-dark.json )
 * [Nord - Vim]( nord-vim.json ) - Just [Nord]( https://compiledexperience.com/blog/posts/windows-terminal-nord ), touched up a bit
 
 ### Community themes
