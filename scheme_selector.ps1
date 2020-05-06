@@ -5,12 +5,14 @@
 ## https://github.com/mezcel/terminal-profile.git
 ##
 
-## Make Arrays
+##############################################
+## Make Arrays of avilable setting options
+##############################################
 
 function setSchemeArray() {
 	$outputArray = @()
 
-	## List installed color schemes
+	## List of Windows Terminal's factory default color schemes
 	$defaultSchemesArr = @( "Campbell","Campbell Powershell", "Vintage", "One Half Dark", "One Half Light", "Solarized Dark", "Solarized Light", "Tango Dark", "Tango Light" )
 	$outputArray += ( $defaultSchemesArr )
 
@@ -28,8 +30,9 @@ function setSchemeArray() {
 function setImageArray() {
 	$outputArray = @()
 
-	## list of available .png images
-	$dirRoamingState = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds\*.png"
+	## list of available .png images within the "backgrounds folder"
+    $dirRoamingState = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds\*.png"
+    
 	$files = @( Get-ChildItem $dirRoamingState -Name )
 	foreach ( $file in $files ) {
 		$outputArray += ( $file.ToString() ) 
@@ -41,8 +44,7 @@ function setImageArray() {
 function setProfileNamesArray() {
 	$outputArray = @()
 
-	## List of temrinal profiles
-
+	## List of existing temrinal profiles in settings.json
 	$settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 	$json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
 
@@ -56,17 +58,19 @@ function setProfileNamesArray() {
 
 function setAlignmentArray() {
     $outputArray = @()
-    $outputArray = @( "top", "topRight", "topLeft", "bottom", "bottomRight", "bottomLeft", "right", "left", "center" )
+    $outputArray = @( "center", "top", "bottom", "left", "right", "topRight", "topLeft",  "bottomRight", "bottomLeft" )
     return $outputArray
 }
 
 function setStretchArray() {
     $outputArray = @()
-    $outputArray = @( "fill", "none", "uniform", "uniformToFill" )
+    $outputArray = @( "none", "fill", "uniform", "uniformToFill" )
     return $outputArray
 }
 
-## Display Arrays Options
+##############################################
+## Display Arrays Options as a Numbered Menu
+##############################################
 
 function displayList( [string[]] $inputArray, [int] $minColWidth, [int] $noCols ) {
 
@@ -95,12 +99,14 @@ function displayList( [string[]] $inputArray, [int] $minColWidth, [int] $noCols 
 	}
 }
 
+##############################################
 ## Write selections to Json ( settings.json )
+##############################################
 
-function copySettings() {
+function backupSettings() {
     Write-Host ""
     $destination = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
-    Write-Host Copying: $destination\settings.json -ForegroundColor Cyan
+    Write-Host "Backup Copying:`n`t$destination\settings.json" -ForegroundColor Cyan
 
     if ( Test-Path $destination ) {
         ## Backup settings.json
@@ -109,17 +115,15 @@ function copySettings() {
         Start-Sleep 1
     }
 
-    Write-Host "done." -ForegroundColor Green
-    Write-Host "`tCopied: $destination\settings.json" -ForegroundColor Green
+    Write-Host "Done.`n`tBackup Copied:`n`t$destination\settings.json" -ForegroundColor Green
 }
 
-function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackgroundImage, [string]$MyBackgroundImageAlignment, [string]$MyBackgroundImageStretchMode, [double]$MyBackgroundImageOpacity ) {
-    Write-Host ""
+function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackgroundImage, 
+    [string]$MyBackgroundImageAlignment, [string]$MyBackgroundImageStretchMode, [double]$MyBackgroundImageOpacity ) {
 
+    Write-Host ""
     $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-    
-    Write-Host Editing: $settingsLocal -ForegroundColor Cyan
-    #$settingsLocal =".\settings.json"
+    Write-Host "Editing:`n`t$settingsLocal" -ForegroundColor Cyan
 	$mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
 
 	$mySettings.profiles.list | % {
@@ -133,9 +137,7 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
 		}
 		
     $mySettings | ConvertTo-Json -depth 32 | set-content "$settingsLocal"
-    
-    Write-Host "done." -ForegroundColor Green
-    Write-Host "`tWrote: $settingsLocal" -ForegroundColor Green    
+    Write-Host "Done.`n`tEdited:`n`t$settingsLocal" -ForegroundColor Green    
 }
 
 function main() {
@@ -146,6 +148,7 @@ function main() {
     $imageAlign = @(setAlignmentArray)
     $imageStretch = @(setStretchArray)
 
+    ## Profile
     Write-Host "Select an existing terminal profile to edit" -ForegroundColor Cyan
     Write-Host "Existing Termainl Profiles:" -ForegroundColor Yellow
     $colWidth = 32
@@ -159,6 +162,7 @@ function main() {
     $name = $profileNames[$menuNumber]
     Write-Host "You selected: "$name
 
+    ## Color Scheme
     Write-Host ""
     Write-Host "Select an existing color scheme to apply to profile" -ForegroundColor Cyan
     Write-Host "Installed Color Schemes:" -ForegroundColor Yellow
@@ -169,10 +173,12 @@ function main() {
     Write-Host ""
     $arrLen = $colorSchemes.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
+    Write-Host "`tNote: Most color schemes look bad on Powershell."
     $menuNumber = Read-Host "Enter number"
     $color = $colorSchemes[$menuNumber]
     Write-Host "You selected: "$color
 
+    ## Background Picture
     Write-Host ""
     Write-Host "Select an existing picture to apply to scheme" -ForegroundColor Cyan
     Write-Host "Available Background Images:" -ForegroundColor Yellow
@@ -187,6 +193,7 @@ function main() {
     $pic = $backgroundImage[$menuNumber]
     Write-Host "You selected: "$pic
 
+    ## Picture Alignment
     Write-Host ""
     Write-Host "Select an alignment to apply to background picture" -ForegroundColor Cyan
     Write-Host "Available Alignment Options:" -ForegroundColor Yellow
@@ -201,6 +208,7 @@ function main() {
     $align = $imageAlign[$menuNumber]
     Write-Host "You selected: "$align
 
+    ## Picture Stretch
     Write-Host ""
     Write-Host "Select a stretch to apply to background picture" -ForegroundColor Cyan
     Write-Host "Available Stretch Options:" -ForegroundColor Yellow
@@ -215,36 +223,56 @@ function main() {
     $stretch = $imageStretch[$menuNumber]
     Write-Host "You selected: "$stretch
 
+    ## Picture Opacity/Transparency
     Write-Host ""
-    Write-Host "Select a stretch to apply to background picture" -ForegroundColor Cyan
-    Write-Host "Available Stretch Options:" -ForegroundColor Yellow
-    Write-Host "Select a number between [ 0.0 - 1.0 ] "
+    Write-Host "Select the opacity alpha transparacy to apply to the background picture" -ForegroundColor Cyan
+    Write-Host "Available Opacity Options:" -ForegroundColor Yellow
+    Write-Host "Select a number between [ 0 - 1 ]`n`tAim arround ( 0.1 - 0.3 ) for a more discrete look.`n"
     $alpha = Read-Host "Enter number"
     Write-Host "You entered: "$alpha
 
+    ## Selection Summary
     Write-Host ""
-    Write-Host "Selection Summary:" -ForegroundColor Red -BackgroundColor Black
-    Write-Host "
-        Profile Name        : $name 
-        Scheme Color        : $color 
-        Background Picture  : $pic 
-        Picture Allignment  : $align 
-        Picture Stretch     : $stretch 
-        Picture Alpha       : $alpha
-    " -ForegroundColor Red -BackgroundColor Black
+    Write-Host "Selection Summary:`n" -ForegroundColor Red -BackgroundColor Black
+    Write-Host "`tProfile Name`t`t: $name" -ForegroundColor Red -BackgroundColor Black
+    Write-Host "`tScheme Color`t`t: $color " -ForegroundColor Red -BackgroundColor Black
+    Write-Host "`tBackground Picture`t: $pic " -ForegroundColor Red -BackgroundColor Black
+    Write-Host "`tPicture Allignment`t: $align " -ForegroundColor Red -BackgroundColor Black
+    Write-Host "`tPicture Stretch`t`t: $stretch " -ForegroundColor Red -BackgroundColor Black
+    Write-Host "`tPicture Alpha`t`t: $alpha " -ForegroundColor Red -BackgroundColor Black
+    Write-Host ""
+    
+    ## Confirmation Prompt
+    $yn = ""
+    While( ( $yn -ne "yes") -and ( $yn -ne "no" ) ) {
+        ## Write files
+        Write-Host "Procede? "
+        $yn = "n"
+        $yn = Read-Host "Enter: 'yes' or 'no' "
 
-    ## Write files
-    Write-Host "Procede? "
-    $yn = "n"
-    $yn = Read-Host "Enter: 'yes' or 'no' "
+        if ( $yn -eq "yes" ) {
+            backupSettings
+            writeProfile $name $color $pic $align $stretch $alpha
+            exit
+        }
 
-    if ( $yn -eq "yes" ) {
-        copySettings
-        writeProfile $name $color $pic $align $stretch $alpha
+        if ( $yn -eq "no" ) {
+            Write-Host "`nNo Changes were applied. Try again when you are ready.`n" -ForegroundColor Red
+        }
+
+        if ( ( $yn -ne "yes") -and ( $yn -ne "no" ) ) {
+            Write-Host "`nTry again." -ForegroundColor Yellow
+            Write-Host "`tYou entered: $yn`n" -ForegroundColor Yellow
+        }
+
     }
 
     ## Edit settings.json in notepad
-    # notepad $settingsLocal
+    # notepad $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+    ## Manage Backup files in windows explorer
+    # explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
+    ## Manage Backup dirs in windows explorer
+    # explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe
 }
 
 #####################
@@ -253,6 +281,7 @@ function main() {
 
 Clear-Host
 
+## Title header
 Write-Host "###################################################################"
 Write-Host "## Windows Terminal Theme Selection "
 Write-Host "###################################################################"
@@ -269,7 +298,7 @@ Write-Host "##  Mezcel"
 Write-Host "##  https://github.com/mezcel/terminal-profile.git"
 Write-Host "##"
 Write-Host "###################################################################"
-Write-Host ""
+Write-Host "`nChanges to your system will not occur untill confirmation at the end.`n" -ForegroundColor Magenta
 
 ## Main
 
