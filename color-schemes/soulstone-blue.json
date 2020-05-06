@@ -4,16 +4,16 @@
 	"red"           : "#c94922",
 	"green"         : "#ac9739",
 	"yellow"        : "#c08b30",
-	"blue"          : "#2d5d85", // comments
-	"purple"        : "#a7c407", // include
+	"blue"          : "#2d5d85",
+	"purple"        : "#a7c407",
 	"cyan"          : "#22a2c9",
-	"white"         : "#c9a350", // highlight
+	"white"         : "#c9a350",
 	"brightBlack"   : "#6b7394",
 	"brightRed"     : "#c76b29",
-	"brightGreen"   : "#cde256", // PS1
+	"brightGreen"   : "#cde256",
 	"brightYellow"  : "#5e6687",
-	"brightBlue"    : "#5e5bfa", // Dir
-	"brightPurple"  : "#f1e4df", //
+	"brightBlue"    : "#5e5bfa",
+	"brightPurple"  : "#f1e4df",
 	"brightCyan"    : "#9c637a",
 	"brightWhite"   : "#f5f7ff",
 	"background"    : "#202746",

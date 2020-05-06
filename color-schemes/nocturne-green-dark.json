@@ -1,18 +1,18 @@
 {
 	"name"          : "Nocturne Green Dark",
 	"black"         : "#112616",
-	"red"           : "#808851", // num 
+	"red"           : "#808851",
 	"green"         : "#2f7e25",
 	"yellow"        : "#717f24",
-	"blue"          : "#6d5922", // comments
-	"purple"        : "#7fa009", // include
+	"blue"          : "#6d5922",
+	"purple"        : "#7fa009",
 	"cyan"          : "#327f77",
 	"white"         : "#647d75",
 	"brightBlack"   : "#3c4812",
 	"brightRed"     : "#e08009",
-	"brightGreen"   : "#4d7748", // PS1
+	"brightGreen"   : "#4d7748",
 	"brightYellow"  : "#bde000",
-	"brightBlue"    : "#7e4c12", // Dir
+	"brightBlue"    : "#7e4c12",
 	"brightPurple"  : "#0058e0",
 	"brightCyan"    : "#00e0c4",
 	"brightWhite"   : "#73fa91",

@@ -1,36 +1,11 @@
-/*
-    settings.json
-    PATH:
-        %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
-
-    Windows Terminal Source Code:
-        https://github.com/microsoft/terminal
-
-    Default Configs:
-        To view the default settings, hold "alt" while clicking on the "Settings" button.
-        For documentation on these settings, see: https://aka.ms/terminal-documentation
-
-    Default Color themes
-        Campbell, One Half Dark, One Half Light, Solarized Light, Campbell Powershell,
-        Solarized Dark, Tango Dark, Tango Light, Vintage
-
-    Other Color Themes:
-        https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/windowsterminal
-        https://terminalsplash.com/
-
-    Pictures Directory:
-        %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\
-*/
-
 {
     "$schema"           : "https://aka.ms/terminal-profiles-schema",
-    //"defaultProfile"    : "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",     /* WLS */
-    "defaultProfile"    : "{680507ee-fd3b-467e-a55b-1bc95b40a025}",   /* Git Bash */
+    "defaultProfile"    : "{680507ee-fd3b-467e-a55b-1bc95b40a025}", 
 
     "profiles": {
         "defaults": {},
         "list": [
-            {   // Git Bash
+            {
                 "guid"                          : "{680507ee-fd3b-467e-a55b-1bc95b40a025}",
                 "hidden"                        : false,
                 "name"                          : "Git Bash",
@@ -41,11 +16,10 @@
                 "backgroundImageAlignment"      : "bottomRight",
                 "backgroundImageStretchMode"    : "none",
                 "backgroundImageOpacity"        : 0.20,
-                //"colorScheme"                   : "Violet Light",
                 "colorScheme"                   : "Dracula",
                 "cursorShape"                   : "emptyBox"
             },
-            {   // Debian
+            {   
                 "guid"                          : "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
                 "hidden"                        : false,
                 "name"                          : "Debian",
@@ -58,7 +32,7 @@
                 "icon"                          : "ms-appdata:///roaming/icons/debian.ico",
                 "cursorShape"                   : "filledBox"
             },
-            {   // PS
+            {
                 "guid"                          : "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "name"                          : "Windows PowerShell",
                 "commandline"                   : "powershell.exe",
@@ -70,7 +44,7 @@
                 "backgroundImageOpacity"        : 0.20,
                 "cursorShape"                   : "underscore"
             },
-            {   // CMD
+            { 
                 "guid"                          : "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "name"                          : "cmd",
                 "commandline"                   : "cmd.exe",
@@ -82,7 +56,7 @@
                 "backgroundImageOpacity"        : 0.20,
                 "cursorShape"                   : "vintage"
             },
-            {   // VS PS
+            {  
                 "commandline": "powershell.exe -noe -c \"&{Import-Module \"\"\"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/Tools/Microsoft.VisualStudio.DevShell.dll\"\"\"; Enter-VsDevShell 1e3ca9fe}\"",
                 "name"                          : "Developer PowerShell for VS 2019",
                 "hidden"                        : false,
@@ -96,7 +70,7 @@
                 "backgroundImageOpacity"        : 0.30,
                 "cursorShape"                   : "underscore"
             },
-            {   // VS CMD
+            { 
                 "commandline": "cmd.exe /k \"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/Tools/VsDevCmd.bat\"",
                 "name"                          : "Developer CMD for VS 2019",
                 "hidden"                        : false,
@@ -110,7 +84,7 @@
                 "backgroundImageOpacity"        : 0.20,
                 "cursorShape"                   : "vintage"
             },
-            {   // Azure
+            {  
                 "guid"      : "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden"    : true,
                 "name"      : "Azure Cloud Shell",
@@ -120,7 +94,7 @@
     },
 
     "schemes": [
-        {   /* Ubuntu https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/terminal/Ubuntu.terminal */
+        { 
             "name"          : "Ubuntu",
             "black"         : "#2e3436",
             "red"           : "#cc0000",
@@ -141,7 +115,7 @@
             "background"    : "#300a24",
             "foreground"    : "#eeeeec"
         },
-        {   /* Dracula https://draculatheme.com/windows-terminal */
+        { 
 
             "name"          : "Dracula",
             "background"    : "#272935",
@@ -163,7 +137,7 @@
             "brightWhite"   : "#F8F8F2",
             "brightYellow"  : "#FFFFA5"
         },
-        {   /* Nord https://compiledexperience.com/blog/posts/windows-terminal-nord */
+        { 
         
             "name"          : "Nord",
             "background"    : "#2e3440",
@@ -185,7 +159,7 @@
             "white"         : "#e5e9f0",
             "yellow"        : "#ebcb8b"
         },
-        {   /* VS Code https://github.com/adstep/vscode-windows-terminal-theme */
+        { 
         
             "name"          : "VS Code",
             "background"    : "#232323",
@@ -207,35 +181,35 @@
             "white"         : "#EAEAEA",
             "yellow"        : "#D7BA7D"
         },
-        {   /* Nord - for VIM * based on the Nord feel */
+        { 
         
             "name"          : "Nord - Vim",
             "background"    : "#2e3440",
             "foreground"    : "#d8dee9",
             "black"         : "#3b4252",
-            "blue"          : "#4041a1", // c comments
-            "brightBlack"   : "#4c566a", //
-            "brightBlue"    : "#81a1c1", // bash dirs and PS1
-            "brightCyan"    : "#8fbcbb", //
-            "brightGreen"   : "#608eb4", // data type
-            "brightPurple"  : "#b48ead", //
+            "blue"          : "#4041a1",
+            "brightBlack"   : "#4c566a", 
+            "brightBlue"    : "#81a1c1", 
+            "brightCyan"    : "#8fbcbb", 
+            "brightGreen"   : "#608eb4",
+            "brightPurple"  : "#b48ead", 
             "brightRed"     : "#bf616a",
             "brightWhite"   : "#eceff4",
             "brightYellow"  : "#ebcb8b",
             "cyan"          : "#88c0d0",
             "green"         : "#a3be8c",
             "purple"        : "#b48ead",
-            "red"           : "#ad525b", // quotes and numbers
+            "red"           : "#ad525b", 
             "white"         : "#e5e9f0",
             "yellow"        : "#ebcb8b",
             "cursorColor"   : "#74a3d8"
         },
-        {   /* Lucius Lilac Dark - for VIM * forked from Dracula */
+        { 
         
             "name"          : "Lucius Lilac Dark",
             "background"    : "#272935",
             "black"         : "#21222C",
-            "blue"          : "#61475a", // c comments
+            "blue"          : "#61475a",
             "cyan"          : "#8BE9FD",
             "foreground"    : "#b88ec0",
             "green"         : "#50FA7B",
@@ -253,37 +227,37 @@
             "brightYellow"  : "#FFFFA5",
             "cursorColor"   : "#FFF"
         },
-        {   /* Shinigami Dark - for VIM * Black Grey Red Blue */
+        { 
         
             "name"          : "Shinigami Dark",
             "background"    : "#262626",
             "black"         : "#21222C",
-            "blue"          : "#61475a", // c comments
+            "blue"          : "#61475a",
             "cyan"          : "#8BE9FD",
-            "foreground"    : "#9e8888", // fun and var
-            "green"         : "#dd4f4f", // data type
-            "purple"        : "#5a8aaa", // include
-            "red"           : "#8480bb", // num
-            "white"         : "#636091", // highlight
+            "foreground"    : "#9e8888", 
+            "green"         : "#dd4f4f",
+            "purple"        : "#5a8aaa", 
+            "red"           : "#8480bb", 
+            "white"         : "#636091",
             "yellow"        : "#FFB86C",
             "brightBlack"   : "#6272A4",
-            "brightBlue"    : "#d14242", // dir path
+            "brightBlue"    : "#d14242", 
             "brightCyan"    : "#A4FFFF",
-            "brightGreen"   : "#c5997b", // PS1
+            "brightGreen"   : "#c5997b",
             "brightPurple"  : "#FF92DF",
             "brightRed"     : "#FF6E6E",
             "brightWhite"   : "#F8F8F2",
             "brightYellow"  : "#FFFFA5",
             "cursorColor"   : "#ca5151"
         },
-        {   /* Apothecary White Light - for VIM * light grey whiteish blue */
+        { 
         
             "name"          : "Apothecary White Light",
             "background"    : "#e8e9f0",
             "black"         : "#3d3e4d",
             "blue"          : "#ac0d84",
             "cyan"          : "#4d3092",
-            "foreground"    : "#6862a3", // 36344d // 6862a3
+            "foreground"    : "#6862a3",
             "green"         : "#0c972f",
             "purple"        : "#3e5361",
             "red"           : "#b94e10",
@@ -292,14 +266,14 @@
             "brightBlack"   : "#bfc3cf",
             "brightBlue"    : "#443752",
             "brightCyan"    : "#A4FFFF",
-            "brightGreen"   : "#753681", // tty objs
+            "brightGreen"   : "#753681", 
             "brightPurple"  : "#FF92DF",
             "brightRed"     : "#FF6E6E",
             "brightWhite"   : "#58581f",
             "brightYellow"  : "#FFFFA5",
             "cursorColor"   : "#710275"
         },
-        {   /* Violet Light - https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/windowsterminal/Violet%20Light.json */
+        { 
         
             "name"          : "Violet Light",
             "black"         : "#56595c",
@@ -322,22 +296,22 @@
             "foreground"    : "#536870",
             "cursorColor"   : "#536870"
         },
-        {   /* Nocturne Green Dark - for Vim */
+        { 
 
             "name"          : "Nocturne Green Dark",
             "black"         : "#112616",
-            "red"           : "#808851", // num 
+            "red"           : "#808851",
             "green"         : "#2f7e25",
             "yellow"        : "#717f24",
-            "blue"          : "#6d5922", // comments
-            "purple"        : "#7fa009", // include
+            "blue"          : "#6d5922", 
+            "purple"        : "#7fa009", 
             "cyan"          : "#327f77",
             "white"         : "#647d75",
             "brightBlack"   : "#3c4812",
             "brightRed"     : "#e08009",
-            "brightGreen"   : "#4d7748", // PS1
+            "brightGreen"   : "#4d7748", 
             "brightYellow"  : "#bde000",
-            "brightBlue"    : "#7e4c12", // Dir
+            "brightBlue"    : "#7e4c12",
             "brightPurple"  : "#0058e0",
             "brightCyan"    : "#00e0c4",
             "brightWhite"   : "#73fa91",
@@ -345,23 +319,23 @@
             "foreground"    : "#637d75",
             "cursorColor"   : "#3eb944"
         },
-        {   /* Soulstone Blue - Dark blue and yellow */
+        { 
 
             "name"          : "Soulstone Blue",
             "black"         : "#202746",
             "red"           : "#c94922",
             "green"         : "#ac9739",
             "yellow"        : "#c08b30",
-            "blue"          : "#2d5d85", // comments
-            "purple"        : "#a7c407", // include
+            "blue"          : "#2d5d85", 
+            "purple"        : "#a7c407",
             "cyan"          : "#22a2c9",
-            "white"         : "#c9a350", // highlight
+            "white"         : "#c9a350",
             "brightBlack"   : "#6b7394",
             "brightRed"     : "#c76b29",
-            "brightGreen"   : "#cde256", // PS1
+            "brightGreen"   : "#cde256",
             "brightYellow"  : "#5e6687",
-            "brightBlue"    : "#5e5bfa", // Dir
-            "brightPurple"  : "#f1e4df", //
+            "brightBlue"    : "#5e5bfa", 
+            "brightPurple"  : "#f1e4df",
             "brightCyan"    : "#9c637a",
             "brightWhite"   : "#f5f7ff",
             "background"    : "#202746",
@@ -371,7 +345,5 @@
         
     ],
 
-    // Add any keybinding overrides to this array.
-    // To unbind a default keybinding, set the command to "unbound"
     "keybindings": []
 }
