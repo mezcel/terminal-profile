@@ -15,7 +15,6 @@ function setSchemeArray() {
 	$outputArray += ( $defaultSchemesArr )
 
 	$settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-	$settingsLocal = ".\settings.json"
 	$json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
 
 	for( $k = 0; $k -lt $json.schemes.name.length; $k++ ) {
@@ -45,7 +44,6 @@ function setProfileNamesArray() {
 	## List of temrinal profiles
 
 	$settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-	$settingsLocal = ".\settings.json"
 	$json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
 
 	for( $k = 0; $k -lt $json.profiles.list.name.length; $k++ ) {
@@ -225,7 +223,7 @@ function main() {
     Write-Host "You entered: "$alpha
 
     Write-Host ""
-    Write-Host "Selection Summary:"
+    Write-Host "Selection Summary:" -ForegroundColor Red -BackgroundColor Black
     Write-Host "
         Profile Name        : $name 
         Scheme Color        : $color 
@@ -233,7 +231,7 @@ function main() {
         Picture Allignment  : $align 
         Picture Stretch     : $stretch 
         Picture Alpha       : $alpha
-    "
+    " -ForegroundColor Red -BackgroundColor Black
 
     ## Write files
     Write-Host "Procede? "
@@ -256,7 +254,7 @@ function main() {
 Clear-Host
 
 Write-Host "###################################################################"
-Write-Host "## Windows Terminal Theme Selection                              ##"
+Write-Host "## Windows Terminal Theme Selection "
 Write-Host "###################################################################"
 Write-Host "##"
 Write-Host "## About:"
