@@ -20,13 +20,18 @@
     IMPORTANT:
     - DO NOT run scripts within Windows Terminal itself.
     - It will close itself and terminate the script. ( no harm, no foul )
+    - Remove all comments (if any) from the settings.json file
     ```
+
+* Theme selector script [scheme_selector.json](scheme_selector.json)
+    * settings.json must be cleared of all comments
+    * Optimized for the graphics included in this repo
 
 ### Manual Install ( drag-n-drop )
 
 * [Install multimedia graphics](RoamingState/README.md)
 * [Copy my configuration settings](LocalState/README.md)
-    * Redundant: [Install color schemes](color-schemes/README.md)
+    * Redundant: [drag and drop color schemes](color-schemes/README.md)
 
 ## 3.0 Notes
 

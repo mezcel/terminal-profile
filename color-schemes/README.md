@@ -79,3 +79,19 @@ I also named them after ( Games Workshop / Citadel ) paint colors
 * [terminalsplash]( https://terminalsplash.com/ )
 * [ColorTool]( https://github.com/microsoft/terminal/releases/tag/1904.29002 )
 
+#### General Colors for Vim
+
+    ```json
+    {
+        "name"          : "Nocturne Green Dark",
+        "red"           : "#808851", // Numbers
+        "blue"          : "#6d5922", // Comments
+        "purple"        : "#7fa009", // Include
+        "white"         : "#647d75", // Highlight
+        "brightGreen"   : "#4d7748", // PS1
+        "brightBlue"    : "#7e4c12", // Dir
+        "background"    : "#0f1610", // background
+        "foreground"    : "#637d75", // general text
+        "cursorColor"   : "#3eb944"  // cursor
+    }
+    ```
