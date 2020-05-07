@@ -57,7 +57,7 @@ Manually copy the ```.json``` text and paste it into Terminal's ```settings.json
 
 ### My Themes
 
-My custom themes optimized for Vim's C syntax, folds, and highlighting, coloring defaults.
+My custom themes optimized for Vim's C syntax, folds, and highlighting, coloring defaults. My colors match the best on WLS or Gitbash.
 
 I also named them after ( Games Workshop / Citadel ) paint colors
 
@@ -65,7 +65,7 @@ I also named them after ( Games Workshop / Citadel ) paint colors
 * [Apothecary White Light]( apothecary-white-light.json )
 * [Nocturne Green Dark]( nocturne-green-dark.json )
 * [Soulstone Blue]( soulstone-blue.json )
-* [Averland Sunset Yellow]( averland-sunset-yellow.json )
+* [Averland Sunset Yellow]( averland-sunset-yellow.json ) A yellow theme
 * [Mephiston Red]( mephiston-red.json )
 * [Nord - Vim]( nord-vim.json ) - Just [Nord]( https://compiledexperience.com/blog/posts/windows-terminal-nord ), touched up a bit
 
