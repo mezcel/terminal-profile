@@ -341,7 +341,50 @@
             "background"    : "#202746",
             "foreground"    : "#979db4",
             "cursorColor"   : "#bec92d"
-          }
+		},
+		{
+			"name"			: "Averland Sunset",
+			"black"			: "#8a7070",
+			"red"			: "#cc0000",
+			"green"			: "#1260c7",
+			"yellow"		: "#999900",
+			"blue"			: "#0000b2",
+			"purple"		: "#b200b2",
+			"cyan"			: "#00a6b2",
+			"white"			: "#cccccc",
+			"brightBlack"	: "#666666",
+			"brightRed"		: "#e50000",
+			"brightGreen"	: "#8f1b1b",
+			"brightYellow"	: "#e5e500",
+			"brightBlue"	: "#0000ff",
+			"brightPurple"	: "#e500e5",
+			"brightCyan"	: "#00e5e5",
+			"brightWhite"	: "#e5e5e5",
+			"background"	: "#ffeb3a",
+			"foreground"	: "#000000",
+			"cursorColor"	: "#706b40"
+		},
+		{
+			"name": "Mephiston Red",
+			"black": "#a38053",
+			"red": "#d62e4e",
+			"green": "#93ac3b",
+			"yellow": "#beb86b",
+			"blue": "#75500a",
+			"purple": "#ff9239",
+			"cyan": "#6bbeb8",
+			"white": "#3a1414",
+			"brightBlack": "#262626",
+			"brightRed": "#e02553",
+			"brightGreen": "#ffe1a8",
+			"brightYellow": "#a5a380",
+			"brightBlue": "#cc4848",
+			"brightPurple": "#ddb7df",
+			"brightCyan": "#b7dfdd",
+			"brightWhite": "#657a65",
+			"background": "#4e2120",
+			"foreground": "#fd8585"
+		}
         
     ],
 
