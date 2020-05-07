@@ -34,7 +34,7 @@
 
     ## Launch with Flags:
     .\scheme_selector.ps1 --help            ## Help instructions (n/a)
-    .\scheme_selector.ps1 --reset           ## Restres profiles back to my defaults
+    .\scheme_selector.ps1 --reset           ## Restores profiles back to my defaults
     .\scheme_selector.ps1 --rem-backups     ## Cleans out all temporary backups"
     .\scheme_selector.ps1 --import          ## Import a json file theme (n/a)
     ```

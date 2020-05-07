@@ -166,7 +166,7 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
 		}
 		
     $mySettings | ConvertTo-Json -depth 32 | set-content "$settingsLocal"
-    Write-Host "Done.`n`tEdited:`n`t$settingsLocal" -ForegroundColor Green
+    Write-Host "Done.`n`tEdited:`n`t$settingsLocal `n" -ForegroundColor Green
     Start-Sleep 1
 }
 
