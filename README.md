@@ -4,7 +4,7 @@
 
 * A minimalistic scheme bundle for [Windows Terminal]( https://github.com/microsoft/terminal ).
 * Enclosed are: 
-    * color schemes, icons, images, and config file.
+    * json color schemes, icons, images, and a config file.
     * I also made an [installer]( install.ps1 ) and a [theme switcher]( scheme_selector.ps1 ).
 
 [screenshots]( https://gist.github.com/mezcel/b4ce7f783597fb0ee97dfe66a9239175#file-0-readme-md )
@@ -19,8 +19,8 @@
 
     ```diff
     IMPORTANT:
-    - Installer will close all Windows Terminal instances if any are opened.
-    - Processes, inculding the installer script will terminate.
+    - The installer will close all Windows Terminal instances if any are opened.
+    - Processes actively running in Windows Terminal, inculding the installer script, will terminate.
     - Run installer using Win10's native Powershell or Command Prompt clients.
     ```
 

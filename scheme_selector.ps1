@@ -191,6 +191,7 @@ function previewChanges( [string]$name, [string]$color, [string]$pic, [string]$a
 ###############################
 
 function isNumeric ( $Value ) {
+    ## Return True if value is a number
     return $Value -match "^[\d\.]+$"
 }
 
@@ -342,7 +343,7 @@ function resetProfileThemes() {
     writeProfile "Git Bash" "Violet Light" "git-orange.png" "bottomRight" "none" 0.2
 
     Write-Host "`nResetting Debian ...`n" -ForegroundColor Magenta
-    writeProfile "Debian" "Apothecary White Light" "debian-red-small.png" "bottomRight" "none" 0.2
+    writeProfile "Debian" "Apothecary White Light" "debian-red-smaller.png" "bottomRight" "none" 0.2
 
     Write-Host "`nResetting Windows PowerShell ...`n" -ForegroundColor Magenta
     writeProfile "Windows PowerShell" "Campbell Powershell" "ps.png" "bottomRight" "none" 0.2
