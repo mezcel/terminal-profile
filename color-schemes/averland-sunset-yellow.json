@@ -1,0 +1,22 @@
+{
+	"name": "Averland Sunset",
+	"black": "#8a7070",
+	"red": "#cc0000",
+	"green": "#1260c7",
+	"yellow": "#999900",
+	"blue": "#0000b2",
+	"purple": "#b200b2",
+	"cyan": "#00a6b2",
+	"white": "#cccccc",
+	"brightBlack": "#666666",
+	"brightRed": "#e50000",
+	"brightGreen": "#8f1b1b",
+	"brightYellow": "#e5e500",
+	"brightBlue": "#0000ff",
+	"brightPurple": "#e500e5",
+	"brightCyan": "#00e5e5",
+	"brightWhite": "#e5e5e5",
+	"background": "#ffeb3a",
+	"foreground": "#000000",
+	"cursorColor": "#706b40"
+}
