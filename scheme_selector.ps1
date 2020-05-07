@@ -167,6 +167,13 @@ function remBackupSettings() {
     Remove-Item $destination\*.backup
 
     Write-Host "Done.`n`tBackup files were removed from:`n`t$destination" -ForegroundColor Green
+
+    ## Manually Edit settings.json in notepad
+    # notepad $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+    ## Manually Manage Backup files in windows explorer
+    # explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
+    ## Manually Manage Backup dirs in windows explorer
+    # explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe
 }
 
 function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackgroundImage, 
@@ -221,7 +228,7 @@ function showProfile( [string]$MyName ) {
             Write-Host "`tProfile Name`t`t: $MyName" -ForegroundColor DarkYellow -BackgroundColor Black
             Write-Host "`tScheme Color`t`t:"$_.colorscheme.ToString() -ForegroundColor DarkYellow -BackgroundColor Black
             Write-Host "`tBackground Picture`t:"$_.backgroundImage.ToString() -ForegroundColor DarkYellow -BackgroundColor Black
-            Write-Host "`tPicture Allignment`t:"$_.backgroundImageAlignment.ToString() -ForegroundColor DarkYellow -BackgroundColor Black
+            Write-Host "`tPicture Alignment`t:"$_.backgroundImageAlignment.ToString() -ForegroundColor DarkYellow -BackgroundColor Black
             Write-Host "`tPicture Stretch`t`t:"$_.backgroundImageStretchMode.ToString() -ForegroundColor DarkYellow -BackgroundColor Black
             Write-Host "`tPicture Alpha`t`t:"$_.backgroundImageOpacity.ToString() -ForegroundColor DarkYellow -BackgroundColor Black
             Write-Host ""
@@ -236,7 +243,7 @@ function previewChanges( [string]$name, [string]$color, [string]$pic, [string]$a
     Write-Host "`tProfile Name`t`t: $name" -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tScheme Color`t`t: $color " -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tBackground Picture`t: ms-appdata:///roaming/backgrounds/$pic " -ForegroundColor Red -BackgroundColor Black
-    Write-Host "`tPicture Allignment`t: $align " -ForegroundColor Red -BackgroundColor Black
+    Write-Host "`tPicture Alignment`t: $align " -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tPicture Stretch`t`t: $stretch " -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tPicture Alpha`t`t: $alpha " -ForegroundColor Red -BackgroundColor Black
     Write-Host ""
@@ -272,7 +279,7 @@ function selectProfile() {
     $profileNames = @(setProfileNamesArray)
 
     Write-Host "Select an existing terminal profile to edit" -ForegroundColor Cyan
-    Write-Host "Existing Termainl Profiles:" -ForegroundColor Yellow
+    Write-Host "Existing Terminal Profiles:" -ForegroundColor Yellow
     $colWidth = 32
     $colNo = 3
     displayList $profileNames $colWidth $colNo
@@ -400,7 +407,7 @@ function selectStretch() {
 function selectAplha() {
 
     Write-Host ""
-    Write-Host "Select the opacity alpha transparacy to apply to the background picture" -ForegroundColor Cyan
+    Write-Host "Select the opacity alpha transparency to apply to the background picture" -ForegroundColor Cyan
     Write-Host "Available Opacity Options:" -ForegroundColor Yellow
     Write-Host "Select a number between [ 0 - 1 ]`n`tAim arround ( 0.1 - 0.3 ) for a more discrete look.`n"
     $alpha = Read-Host "Enter number"
@@ -414,7 +421,7 @@ function selectAplha() {
 
 function resetProfileThemes() {
 
-    Write-Host "`n`nRestoring profile themes back to my prefered defaults ...`n" -ForegroundColor Yellow
+    Write-Host "`n`nRestoring profile themes back to my preferred defaults ...`n" -ForegroundColor Yellow
     Start-Sleep 2
     
     Write-Host "`nBacking up existing profile settings ...`n" -ForegroundColor Magenta
@@ -448,11 +455,7 @@ function titleHeader() {
     Write-Host "#########################################################################"
     Write-Host "##"
     Write-Host "## About:"
-    Write-Host "##`tThis script will set up a profile theme with existing resources"
-    Write-Host "##"
-    Write-Host "## Note:"
-    Write-Host "##`tsettings.json must be clear of all comment"
-    Write-Host "##`tcomments will be interpreted as json file sytax errors"
+    Write-Host "##`tThis script will set up a profile theme using existing resources"
     Write-Host "##"
     Write-Host "## Author:"
     Write-Host "##`tMezcel"
@@ -464,7 +467,7 @@ function titleHeader() {
     Write-Host "##`t--rem-backups`tCleans out all temporary backups"
     Write-Host "##`t--import`tImport a json file theme (n/a)"
     Write-Host "#########################################################################"
-    Write-Host "`nChanges to your settings.json will not occur untill confirmation at the end.`n" -ForegroundColor Magenta
+    Write-Host "`nChanges to your settings.json will not occur until confirmation at the end.`n" -ForegroundColor Magenta
 }
 
 function helpDisplay( [string]$scriptName ) {
@@ -482,10 +485,9 @@ function helpDisplay( [string]$scriptName ) {
     Write-Host "##`t.\$scriptName --help`t`t## Help instructions"
     Write-Host "##`t.\$scriptName --reset`t`t## Resets profile styles"
     Write-Host "##`t.\$scriptName --rem-backups`t## Delete backup saves"
-    Write-Host "##`t.\$scriptName --import`t`t## Import a json file theme (n/a)"
     Write-Host "##"
     Write-Host "## Json Parsing:"
-    Write-Host "## `tJson is parsed using Powershell's builtin Json parser."
+    Write-Host "## `tJson is parsed using Powershell's built-in Json parser."
     Write-Host "##`tThe parser will return errors if it detects comments."
     Write-Host "##`tDelete comments from settings.json for this script to work."
     Write-Host "#########################################################################`n"
@@ -525,7 +527,7 @@ function main() {
     $yn = ""
     While( ( $yn -ne "yes") -and ( $yn -ne "no" ) ) {
         ## Write files
-        Write-Host "Procede? "
+        Write-Host "Proceed? "
         $yn = "n"
         $yn = Read-Host "Enter: 'yes' or 'no' "
 
@@ -546,13 +548,6 @@ function main() {
         }
 
     }
-
-    ## Manually Edit settings.json in notepad
-    # notepad $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
-    ## Manually Manage Backup files in windows explorer
-    # explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
-    ## Manually Manage Backup dirs in windows explorer
-    # explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe
 }
 
 #####################
@@ -568,17 +563,14 @@ $inputArgs.ToString()
 switch -Exact ( $inputArgs ) {
 
     "--reset" {         ## Reset to my defaults
-        resetProfileThemes; Break }        
+        resetProfileThemes; Break }
     "--rem-backups" {   ## rem backup settings.json
-        remBackupSettings; Break }   
-    "--import" { 
-        Write-Host "Import json feature not done yet`n" -ForegroundColor Yellow;
-        Start-Sleep 1; } 
+        remBackupSettings; Break }
     "--help" {          ## runtime help
         ## the file name of this .ps1 script
         $scriptName = $MyInvocation.MyCommand.Name
         helpDisplay $scriptName
-        Break; } 
+        Break; }
     Default { main }    ## Main UI Theme Selector
 
 }
