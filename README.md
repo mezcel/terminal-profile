@@ -13,9 +13,9 @@
 
 ## 2.0 Install
 
-### Installer ( scripts )
+### Installer ( shell scripts )
 
-* Execute, either [install.ps1](install.ps1) or [install.bat](install.bat), from this repo's root directory.
+* **Execute**, either [install.ps1](install.ps1) or [install.bat](install.bat), from this repo's root directory.
 
     ```diff
     IMPORTANT:
@@ -27,12 +27,12 @@
 * **Theme selector** script [scheme_selector.ps1](scheme_selector.ps1)
     * The settings.json file must be cleared of all comments
         * Powershell's json parser does not like comments.
-    * Script assumes the user has: ```$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds\```
 
     ```ps1
+    ## Launch
     .\scheme_selector.ps1                   ## Normal operation
 
-    ## Flags:
+    ## Launch with Flags:
     .\scheme_selector.ps1 --help            ## Help instructions (n/a)
     .\scheme_selector.ps1 --reset           ## Restres profiles back to my defaults
     .\scheme_selector.ps1 --rem-backups     ## Cleans out all temporary backups"
