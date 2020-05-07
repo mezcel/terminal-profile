@@ -3,7 +3,9 @@
 ## 1.0 About
 
 * A minimalistic scheme bundle for [Windows Terminal]( https://github.com/microsoft/terminal ).
-* Enclosed are: color schemes, icons, images, config file, and <u>**[installer]( install.ps1 )**</u>.
+* Enclosed are: 
+    * color schemes, icons, images, and config file.
+    * I also made an [installer]( install.ps1 ) and a [theme switcher]( scheme_selector.ps1 ).
 
 [screenshots]( https://gist.github.com/mezcel/b4ce7f783597fb0ee97dfe66a9239175#file-0-readme-md )
 
@@ -11,21 +13,21 @@
 
 ## 2.0 Install
 
-### Installers ( scripts )
+### Installer ( scripts )
 
-* ```CD``` into wherever this repo is on the computer.
-* From within ```terminal-profile```'s root directory, run either: [.\install.ps1](install.ps1) or [.\install.bat](install.bat).
+* Execute, either [install.ps1](install.ps1) or [install.bat](install.bat), from this repo's root directory.
 
     ```diff
     IMPORTANT:
-    - DO NOT run scripts within Windows Terminal itself.
-    - It will close itself and terminate the script. ( no harm, no foul )
-    - Remove all comments (if any) from the settings.json file
+    - Installer will close all Windows Terminal instances if any are opened.
+    - Processes, inculding the installer script will terminate.
+    - Run installer using Win10's native Powershell or Command Prompt clients.
     ```
 
-* Theme selector script [scheme_selector.json](scheme_selector.json)
-    * settings.json must be cleared of all comments
-    * Optimized for the graphics included in this repo
+* **Theme selector** script [scheme_selector.ps1](scheme_selector.ps1)
+    * The settings.json file must be cleared of all comments
+        * Powershell's json parser does not like comments.
+    * Script assumes the user has: ```$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds\```
 
 ### Manual Install ( drag-n-drop )
 
