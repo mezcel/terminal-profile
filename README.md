@@ -15,7 +15,7 @@
 
 ### Installer ( shell scripts )
 
-* **Execute**, either [install.ps1](install.ps1) or [install.bat](install.bat), from this repo's root directory.
+* **Execute**, either **[install.ps1](install.ps1)** or **[install.bat](install.bat)**, from this repo's root directory, via Command Prompt or Powershell.
 
     ```diff
     IMPORTANT:
@@ -42,7 +42,7 @@
 
 * [Install multimedia graphics](RoamingState/README.md)
 * [Copy my configuration settings](LocalState/README.md)
-    * Redundant: [drag and drop color schemes](color-schemes/README.md)
+* [Drag and drop color schemes](color-schemes/README.md) ( *Redundant* )
 
 ## 3.0 Notes
 

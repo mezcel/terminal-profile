@@ -417,7 +417,7 @@ function selectAplha() {
     Write-Host ""
     Write-Host "Select the opacity alpha transparency to apply to the background picture" -ForegroundColor Cyan
     Write-Host "Available Opacity Options:" -ForegroundColor Yellow
-    Write-Host "Select a number between [ 0.01 - 1.00 ]`n`tAim arround ( 0.05 - 0.25 ) for a discrete watermerked look.`n"
+    Write-Host "Select a number between [ 0.01 - 1.00 ]`n`tAim around ( 0.05 - 0.25 ) for a discrete watermarked look.`n"
     $alpha = Read-Host "Enter number"
     $alpha = correctNumRange $alpha 0 1 0.2
     Write-Host "Transparency value will be: "$alpha -ForegroundColor DarkYellow
@@ -574,15 +574,22 @@ titleHeader
 
 switch -Exact ( $inputArgs ) {
     "--reset" {         ## Reset to my defaults
-        resetProfileThemes; Break }
+        resetProfileThemes
+		Break; }
+		
     "--rem-backups" {   ## rem backup settings.json
-        remBackupSettings; Break }
+        remBackupSettings
+		Break; }
+		
     "--help" {          ## runtime help
         ## the file name of this .ps1 script
         $scriptName = $MyInvocation.MyCommand.Name
         helpDisplay $scriptName
         Break; }
-    Default { main }    ## Main UI Theme Selector
+		
+    Default {			## Main UI Theme Selector
+		main 
+		}
 
 }
 
