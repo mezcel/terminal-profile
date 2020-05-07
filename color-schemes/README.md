@@ -57,7 +57,7 @@ Manually copy the ```.json``` text and paste it into Terminal's ```settings.json
 
 ### My Themes
 
-My custom themes optimized for Vim's C syntax, folds, and highlighting, coloring defaults. My colors match the best on WLS or Gitbash.
+My custom themes optimized for Vim's C syntax, folds, and highlighting, coloring defaults. My colors look better on WLS and Gitbash compared to Powershell.
 
 I also named them after ( Games Workshop / Citadel ) paint colors
 
@@ -83,17 +83,17 @@ I also named them after ( Games Workshop / Citadel ) paint colors
 
 #### General Colors for Vim
 
-    ```json
-    {
-        "name"          : "Nocturne Green Dark",
-        "red"           : "#808851", // Numbers
-        "blue"          : "#6d5922", // Comments
-        "purple"        : "#7fa009", // Include
-        "white"         : "#647d75", // Highlight
-        "brightGreen"   : "#4d7748", // PS1
-        "brightBlue"    : "#7e4c12", // Dir
-        "background"    : "#0f1610", // background
-        "foreground"    : "#637d75", // general text
-        "cursorColor"   : "#3eb944"  // cursor
-    }
-    ```
+```json
+{
+    "name"          : "Nocturne Green Dark",
+    "red"           : "#808851", // Numbers
+    "blue"          : "#6d5922", // Comments
+    "purple"        : "#7fa009", // Include
+    "white"         : "#647d75", // Highlight
+    "brightGreen"   : "#4d7748", // PS1
+    "brightBlue"    : "#7e4c12", // Dir
+    "background"    : "#0f1610", // background
+    "foreground"    : "#637d75", // general text
+    "cursorColor"   : "#3eb944"  // cursor
+}
+```
