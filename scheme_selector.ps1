@@ -5,6 +5,9 @@
     https://github.com/mezcel/terminal-profile.git
 #>
 
+## External argument inputs
+param( $inputArgs )
+
 ##############################################
 ## Make Arrays of avilable setting options
 ##############################################
@@ -107,6 +110,7 @@ function backupSettings() {
     Write-Host ""
     $destination = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
     Write-Host "Backup Copying:`n`t$destination\settings.json" -ForegroundColor Cyan
+    Start-Sleep 1
 
     if ( Test-Path $destination ) {
         ## Backup settings.json
@@ -117,6 +121,7 @@ function backupSettings() {
 
     Write-Host "Done.`n`tBackup Copy:`n`t$destination\..." -ForegroundColor Green
     Write-Host "`t`tsettings(backup-$time).json" -ForegroundColor Green
+    Start-Sleep 1
 
 }
 
@@ -139,7 +144,8 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
 		}
 		
     $mySettings | ConvertTo-Json -depth 32 | set-content "$settingsLocal"
-    Write-Host "Done.`n`tEdited:`n`t$settingsLocal" -ForegroundColor Green    
+    Write-Host "Done.`n`tEdited:`n`t$settingsLocal" -ForegroundColor Green
+    Start-Sleep 1
 }
 
 ##############################################
@@ -322,6 +328,20 @@ function selectAplha() {
     return $alpha
 }
 
+function resetProfileThemes() {
+    
+    backupSettings
+
+    ## Set everything back to the original git repo default theme
+
+    writeProfile "Git Bash" "Violet Light" "git-orange.png" "bottomRight" "none" 0.2
+    writeProfile "Debian" "Apothecary White Light" "debian-white.png" "bottomRight" "none" 0.2
+    writeProfile "Windows PowerShell" "Campbell Powershell" "ps.png" "bottomRight" "none" 0.2
+    writeProfile "cmd" "Vintage" "cmd-white.png" "bottomRight" "none" 0.2
+    writeProfile "Developer PowerShell for VS 2019" "Campbell Powershell" "vs-white.png" "bottomRight" "none" 0.2
+    writeProfile "Developer CMD for VS 2019" "VS Code" "vs-white.png" "bottomRight" "none" 0.2
+}
+
 function titleHeader() {
     Write-Host "###################################################################"
     Write-Host "## Windows Terminal Theme Selection "
@@ -416,6 +436,13 @@ Clear-Host
 ## Title header
 titleHeader
 
-## Main
-main
+if ( $inputArgs -eq "--reset" ) {
+    Write-Host "`n`nRestoring profile themes back to my prefered defaults ...`n`n" -ForegroundColor Yellow
+    Start-Sleep 5
+    ## Reset to my defaults
+    resetProfileThemes
+} else {
+    ## Main UI Theme Selector
+    main
+}
 
