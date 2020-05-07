@@ -8,9 +8,30 @@
 ## External argument inputs
 param( $inputArgs )
 
+# Error message regarding comments in Json file
+function knownParsingError() {
+    ## Help for manually fixing the json file
+
+    Write-Host "`nAn error occurred:" -ForegroundColor Red
+    Write-Host "`t Read the error msg. It is likely because comments were detected in settings.json" -ForegroundColor Red
+    Write-Host "`t Powershell's built-in Json parsing feature does this." -ForegroundColor Red
+    Write-Host "`t Remove ALL comments in file and try again." -ForegroundColor Red
+    Write-Host "`t This script will terminate after the following question.`n" -ForegroundColor Red
+
+    $yn = Read-Host "Do you want to open and edit the settings.json file at this time? [ y / N ] "
+    if ( $yn -eq "y" ) {
+        $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+        notepad $settingsLocal
+        #code $settingsLocal
+    } 
+
+    Exit
+}
+
 ##############################################
 ## Make Arrays of avilable setting options
 ##############################################
+
 
 function setSchemeArray() {
 	$outputArray = @()
@@ -19,8 +40,11 @@ function setSchemeArray() {
 	$defaultSchemesArr = @( "Campbell","Campbell Powershell", "Vintage", "One Half Dark", "One Half Light", "Solarized Dark", "Solarized Light", "Tango Dark", "Tango Light" )
 	$outputArray += ( $defaultSchemesArr )
 
-	$settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-	$json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
+    $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+
+    try { 
+        $json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
+    } catch { knownParsingError }
 
 	for( $k = 0; $k -lt $json.schemes.name.length; $k++ ) {
 		$string = $json.schemes[$k].name
@@ -54,8 +78,13 @@ function setProfileNamesArray() {
 	$outputArray = @()
 
 	## List of existing temrinal profiles in settings.json
-	$settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-	$json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
+    $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+
+    try { 
+        $json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
+    } catch { knownParsingError }
+
+	#$json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
 
 	for( $k = 0; $k -lt $json.profiles.list.name.length; $k++ ) {
 		$string = $json.profiles.list[$k].name
@@ -146,7 +175,10 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
     Write-Host ""
     $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
     Write-Host "Editing:`n`t$settingsLocal" -ForegroundColor Cyan
-    $mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
+
+    try { 
+        $mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
+    } catch { knownParsingError }
     
     $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
     if ( Test-Path -Path "$roamingDir\backgrounds" ) {
@@ -176,8 +208,11 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
 
 function showProfile( [string]$MyName ) {
 
-	$settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-    $mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
+    $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+
+    try { 
+        $mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
+    } catch { knownParsingError }
 
 	$mySettings.profiles.list | % {
         if( $_.name -eq $MyName ) {                
@@ -217,6 +252,21 @@ function isNumeric ( $Value ) {
     return $Value -match "^[\d\.]+$"
 }
 
+function correctNumRange( $inputNo, $min, $max, $defaultNo ) {
+
+    if ( isNumeric $inputNo ) {
+        if (( $inputNo -gt $max ) -or ( $inputNo -lt $min )) {
+            Write-Host "You entered $inputNo, that value is out of range."
+            $inputNo = $defaultNo
+        }
+    } else {
+        Write-Host "You entered $inputNo, that value is out of range."
+        $inputNo = $defaultNo
+    }
+
+    return $inputNo
+}
+
 function selectProfile() {
     
     $profileNames = @(setProfileNamesArray)
@@ -231,8 +281,10 @@ function selectProfile() {
     $arrLen = $profileNames.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
+    $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
     $name = $profileNames[$menuNumber]
-    Write-Host "You selected: "$name -ForegroundColor DarkYellow
+    Write-Host "The profile to be edited will be: "$name -ForegroundColor DarkYellow
+    Write-Host ""
     Start-Sleep 1
 
     return $name
@@ -254,8 +306,10 @@ function selectScheme() {
     Write-Host "Select a number between [ 0 - $arrLen ] "
     Write-Host "`tNote: Most color schemes look bad on Powershell."
     $menuNumber = Read-Host "Enter number"
+    $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
     $color = $colorSchemes[$menuNumber]
-    Write-Host "You selected: "$color -ForegroundColor DarkYellow
+    Write-Host "Color scheme will be set to: "$color -ForegroundColor DarkYellow
+    Write-Host ""
     Start-Sleep 1
 
     return $color
@@ -279,14 +333,16 @@ function selectImage() {
     $arrLen = $backgroundImage.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
+    $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
     $pic = $backgroundImage[$menuNumber]
 
     $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
     if ( Test-Path -Path "$roamingDir\backgrounds" ) {
-        Write-Host "You selected: ms-appdata:///roaming/backgrounds/$pic" -ForegroundColor DarkYellow
+        Write-Host "Background image will be: ms-appdata:///roaming/backgrounds/$pic" -ForegroundColor DarkYellow
     } else {
-        Write-Host "You selected: ms-appdata:///roaming/$pic" -ForegroundColor DarkYellow
+        Write-Host "Background image will be: ms-appdata:///roaming/$pic" -ForegroundColor DarkYellow
     }
+    Write-Host ""
     
     Start-Sleep 1
 
@@ -308,8 +364,10 @@ function selectAlignment() {
     $arrLen = $imageAlign.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
+    $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
     $align = $imageAlign[$menuNumber]
-    Write-Host "You selected: "$align -ForegroundColor DarkYellow
+    Write-Host "Alignment value will be: "$align -ForegroundColor DarkYellow
+    Write-Host ""
     Start-Sleep 1
 
     return $align
@@ -330,8 +388,10 @@ function selectStretch() {
     $arrLen = $imageStretch.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
+    $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
     $stretch = $imageStretch[$menuNumber]
-    Write-Host "You selected: "$stretch -ForegroundColor DarkYellow
+    Write-Host "Streatch value will be: "$stretch -ForegroundColor DarkYellow
+    Write-Host ""
     Start-Sleep 1
 
     return $stretch
@@ -344,16 +404,9 @@ function selectAplha() {
     Write-Host "Available Opacity Options:" -ForegroundColor Yellow
     Write-Host "Select a number between [ 0 - 1 ]`n`tAim arround ( 0.1 - 0.3 ) for a more discrete look.`n"
     $alpha = Read-Host "Enter number"
-    if ( isNumeric $alpha ) {
-        if (( $alpha -gt 1 ) -or ( $alpha -gt 1 )) {
-            Write-Host "You entered $alpha, that value is out of range."
-            $alpha = 1
-        }
-    } else {
-        Write-Host "You entered $alpha, that value is out of range."
-        $alpha = 1
-    }
-    Write-Host "Transparency vale will be: "$alpha -ForegroundColor DarkYellow
+    $alpha = correctNumRange $alpha 0 1 0.2
+    Write-Host "Transparency value will be: "$alpha -ForegroundColor DarkYellow
+    Write-Host ""
     Start-Sleep 1
 
     return $alpha
@@ -414,6 +467,29 @@ function titleHeader() {
     Write-Host "`nChanges to your settings.json will not occur untill confirmation at the end.`n" -ForegroundColor Magenta
 }
 
+function helpDisplay( [string]$scriptName ) {
+    
+    #$scriptName = $MyInvocation.MyCommand.Name
+
+    Write-Host "#########################################################################"
+    Write-Host "## Windows Terminal Theme Selection ( Help / Notes ) "
+    Write-Host "#########################################################################"
+    Write-Host "##"
+    Write-Host "## Launch:"
+    Write-Host "##`t.\scheme_selector.ps1`t`t`t## Normal operation"
+    Write-Host "##"
+    Write-Host "## Launch with Flags:"
+    Write-Host "##`t.\$scriptName --help`t`t## Help instructions"
+    Write-Host "##`t.\$scriptName --reset`t`t## Resets profile styles"
+    Write-Host "##`t.\$scriptName --rem-backups`t## Delete backup saves"
+    Write-Host "##`t.\$scriptName --import`t`t## Import a json file theme (n/a)"
+    Write-Host "##"
+    Write-Host "## Json Parsing:"
+    Write-Host "## `tJson is parsed using Powershell's builtin Json parser."
+    Write-Host "##`tThe parser will return errors if it detects comments."
+    Write-Host "##`tDelete comments from settings.json for this script to work."
+    Write-Host "#########################################################################`n"
+}
 
 function main() {
 
@@ -498,9 +574,11 @@ switch -Exact ( $inputArgs ) {
     "--import" { 
         Write-Host "Import json feature not done yet`n" -ForegroundColor Yellow;
         Start-Sleep 1; } 
-    "--help" { 
-        Write-Host "Help feature not done yet`n" -ForegroundColor Yellow;
-        Start-Sleep 1; } 
+    "--help" {          ## runtime help
+        ## the file name of this .ps1 script
+        $scriptName = $MyInvocation.MyCommand.Name
+        helpDisplay $scriptName
+        Break; } 
     Default { main }    ## Main UI Theme Selector
 
 }
