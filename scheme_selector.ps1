@@ -33,8 +33,14 @@ function setSchemeArray() {
 function setImageArray() {
 	$outputArray = @()
 
-	## list of available .png images within the "backgrounds folder"
-    $dirRoamingState = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds\*.png"
+    ## list of available .png images within the "backgrounds folder"
+    $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
+    
+    if ( Test-Path -Path "$roamingDir\backgrounds" ) {
+        $dirRoamingState = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds\*.png"
+    } else {
+        $dirRoamingState = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\*.png"
+    }
     
 	$files = @( Get-ChildItem $dirRoamingState -Name )
 	foreach ( $file in $files ) {
@@ -115,14 +121,23 @@ function backupSettings() {
     if ( Test-Path $destination ) {
         ## Backup settings.json
         $time = (Get-Date).ToString("yyyy_MM_dd_h_m_s")
-        Copy-Item $destination\settings.json -Destination $destination\settings"(backup-"$time").json" -Force
+        $backupFile = "settings($time).backup"
+        Copy-Item "$destination\settings.json" -Destination "$destination\$backupFile" -Force
         Start-Sleep 1
     }
 
     Write-Host "Done.`n`tBackup Copy:`n`t$destination\..." -ForegroundColor Green
-    Write-Host "`t`tsettings(backup-$time).json" -ForegroundColor Green
+    Write-Host "`t`t$backupFile" -ForegroundColor Green
     Start-Sleep 1
 
+}
+
+function remBackupSettings() {
+    ## Remove backup settings files
+    $destination = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
+    Remove-Item $destination\*.backup
+
+    Write-Host "Done.`n`tBackup files were removed from:`n`t$destination" -ForegroundColor Green
 }
 
 function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackgroundImage, 
@@ -131,12 +146,19 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
     Write-Host ""
     $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
     Write-Host "Editing:`n`t$settingsLocal" -ForegroundColor Cyan
-	$mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
+    $mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
+    
+    $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
+    if ( Test-Path -Path "$roamingDir\backgrounds" ) {
+        $appPath = "ms-appdata:///roaming/backgrounds"
+    } else {
+        $appPath = "ms-appdata:///roaming"
+    }
 
 	$mySettings.profiles.list | % {
 			if( $_.name -eq $MyName ) {
 				$_.colorscheme = $MyColorscheme
-				$_.backgroundImage = "ms-appdata:///roaming/backgrounds/$MyBackgroundImage"
+				$_.backgroundImage = "$appPath/$MyBackgroundImage"
 				$_.backgroundImageAlignment = $MyBackgroundImageAlignment
 				$_.backgroundImageStretchMode = $MyBackgroundImageStretchMode
 				$_.backgroundImageOpacity = $MyBackgroundImageOpacity
@@ -247,6 +269,7 @@ function selectImage() {
     Write-Host "Select an existing picture to apply to scheme" -ForegroundColor Cyan
     Write-Host "`tThis app is set to scan for ( *.png ) images within this dir:" -ForegroundColor Cyan
     Write-Host "`t$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds" -ForegroundColor Cyan
+    Write-Host "`tOtherwise it will scan the parent \RoamingState directory" -ForegroundColor Cyan
     Write-Host "Available Background Images:" -ForegroundColor Yellow
     $colWidth = 24
     $colNo = 4
@@ -257,7 +280,14 @@ function selectImage() {
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
     $pic = $backgroundImage[$menuNumber]
-    Write-Host "You selected: ms-appdata:///roaming/backgrounds/$pic" -ForegroundColor DarkYellow
+
+    $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
+    if ( Test-Path -Path "$roamingDir\backgrounds" ) {
+        Write-Host "You selected: ms-appdata:///roaming/backgrounds/$pic" -ForegroundColor DarkYellow
+    } else {
+        Write-Host "You selected: ms-appdata:///roaming/$pic" -ForegroundColor DarkYellow
+    }
+    
     Start-Sleep 1
 
     return $pic
@@ -358,24 +388,30 @@ function resetProfileThemes() {
     writeProfile "Developer CMD for VS 2019" "VS Code" "vs-white.png" "bottomRight" "none" 0.2
 }
 
+
 function titleHeader() {
-    Write-Host "###################################################################"
+    Write-Host "#########################################################################"
     Write-Host "## Windows Terminal Theme Selection "
-    Write-Host "###################################################################"
+    Write-Host "#########################################################################"
     Write-Host "##"
     Write-Host "## About:"
-    Write-Host "##  This script will set up a profile theme with existing resources"
+    Write-Host "##`tThis script will set up a profile theme with existing resources"
     Write-Host "##"
     Write-Host "## Note:"
-    Write-Host "##  settings.json must be clear of all comment"
-    Write-Host "##  comments will be interpreted as json file sytax errors"
+    Write-Host "##`tsettings.json must be clear of all comment"
+    Write-Host "##`tcomments will be interpreted as json file sytax errors"
     Write-Host "##"
     Write-Host "## Author:"
-    Write-Host "##  Mezcel"
-    Write-Host "##  https://github.com/mezcel/terminal-profile.git"
+    Write-Host "##`tMezcel"
+    Write-Host "##`thttps://github.com/mezcel/terminal-profile.git"
     Write-Host "##"
-    Write-Host "###################################################################"
-    Write-Host "`nChanges to your system will not occur untill confirmation at the end.`n" -ForegroundColor Magenta
+    Write-Host "## Flags:"
+    Write-Host "##`t--help`t`tHelp instructions (n/a)"
+    Write-Host "##`t--reset`t`tRestres profiles back to my defaults "
+    Write-Host "##`t--rem-backups`tCleans out all temporary backups"
+    Write-Host "##`t--import`tImport a json file theme (n/a)"
+    Write-Host "#########################################################################"
+    Write-Host "`nChanges to your settings.json will not occur untill confirmation at the end.`n" -ForegroundColor Magenta
 }
 
 
@@ -424,8 +460,8 @@ function main() {
         }
 
         if ( $yn -eq "no" ) {
-            Write-Host "`nNo Changes were applied. Try again when you are ready." -ForegroundColor Red
-            Write-Host "`tThanks for playing. Bye :)" -ForegroundColor Red
+            Write-Host "`nNo Changes were applied. Try again when you are ready." -ForegroundColor Yellow
+            Write-Host "`tThanks for playing. Bye :)" -ForegroundColor Green
         }
 
         if ( ( $yn -ne "yes") -and ( $yn -ne "no" ) ) {
@@ -452,11 +488,20 @@ Clear-Host
 ## Title header
 titleHeader
 
-if ( $inputArgs -eq "--reset" ) {
-    ## Reset to my defaults
-    resetProfileThemes
-} else {
-    ## Main UI Theme Selector
-    main
+$inputArgs.ToString()
+switch -Exact ( $inputArgs ) {
+
+    "--reset" {         ## Reset to my defaults
+        resetProfileThemes; Break }        
+    "--rem-backups" {   ## rem backup settings.json
+        remBackupSettings; Break }   
+    "--import" { 
+        Write-Host "Import json feature not done yet`n" -ForegroundColor Yellow;
+        Start-Sleep 1; } 
+    "--help" { 
+        Write-Host "Help feature not done yet`n" -ForegroundColor Yellow;
+        Start-Sleep 1; } 
+    Default { main }    ## Main UI Theme Selector
+
 }
 

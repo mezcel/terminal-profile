@@ -29,6 +29,16 @@
         * Powershell's json parser does not like comments.
     * Script assumes the user has: ```$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds\```
 
+    ```ps1
+    .\scheme_selector.ps1                   ## Normal operation
+
+    ## Flags:
+    .\scheme_selector.ps1 --help            ## Help instructions (n/a)
+    .\scheme_selector.ps1 --reset           ## Restres profiles back to my defaults
+    .\scheme_selector.ps1 --rem-backups     ## Cleans out all temporary backups"
+    .\scheme_selector.ps1 --import          ## Import a json file theme (n/a)
+    ```
+
 ### Manual Install ( drag-n-drop )
 
 * [Install multimedia graphics](RoamingState/README.md)
