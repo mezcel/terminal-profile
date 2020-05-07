@@ -329,16 +329,31 @@ function selectAplha() {
 }
 
 function resetProfileThemes() {
+
+    Write-Host "`n`nRestoring profile themes back to my prefered defaults ...`n" -ForegroundColor Yellow
+    Start-Sleep 2
     
+    Write-Host "`nBacking up existing profile settings ...`n" -ForegroundColor Magenta
     backupSettings
 
     ## Set everything back to the original git repo default theme
 
+    Write-Host "`nResetting Git Bash ...`n" -ForegroundColor Magenta
     writeProfile "Git Bash" "Violet Light" "git-orange.png" "bottomRight" "none" 0.2
-    writeProfile "Debian" "Apothecary White Light" "debian-white.png" "bottomRight" "none" 0.2
+
+    Write-Host "`nResetting Debian ...`n" -ForegroundColor Magenta
+    writeProfile "Debian" "Apothecary White Light" "debian-red-small.png" "bottomRight" "none" 0.2
+
+    Write-Host "`nResetting Windows PowerShell ...`n" -ForegroundColor Magenta
     writeProfile "Windows PowerShell" "Campbell Powershell" "ps.png" "bottomRight" "none" 0.2
+
+    Write-Host "`nResetting cmd ...`n" -ForegroundColor Magenta
     writeProfile "cmd" "Vintage" "cmd-white.png" "bottomRight" "none" 0.2
+
+    Write-Host "`nResetting Developer PowerShell for VS 2019 ...`n" -ForegroundColor Magenta
     writeProfile "Developer PowerShell for VS 2019" "Campbell Powershell" "vs-white.png" "bottomRight" "none" 0.2
+
+    Write-Host "`nResetting Developer CMD for VS 2019 ...`n" -ForegroundColor Magenta
     writeProfile "Developer CMD for VS 2019" "VS Code" "vs-white.png" "bottomRight" "none" 0.2
 }
 
@@ -437,8 +452,6 @@ Clear-Host
 titleHeader
 
 if ( $inputArgs -eq "--reset" ) {
-    Write-Host "`n`nRestoring profile themes back to my prefered defaults ...`n`n" -ForegroundColor Yellow
-    Start-Sleep 5
     ## Reset to my defaults
     resetProfileThemes
 } else {
