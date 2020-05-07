@@ -84,8 +84,6 @@ function setProfileNamesArray() {
         $json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
     } catch { knownParsingError }
 
-	#$json = (Get-Content $settingsLocal -Raw) | ConvertFrom-Json
-
 	for( $k = 0; $k -lt $json.profiles.list.name.length; $k++ ) {
 		$string = $json.profiles.list[$k].name
 		$outputArray += ( $string.ToString() ) 
@@ -142,9 +140,11 @@ function displayList( [string[]] $inputArray, [int] $minColWidth, [int] $noCols 
 ##############################################
 
 function backupSettings() {
-    Write-Host ""
     $destination = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
-    Write-Host "Backup Copying:`n`t$destination\settings.json" -ForegroundColor Cyan
+
+    Write-Host "`nCopy and Backup: settings.json" -ForegroundColor Magenta
+    Write-Host "`t$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\..." -ForegroundColor Magenta
+    Write-Host "`t  LocalState\settings.json`n" -ForegroundColor Magenta
     Start-Sleep 1
 
     if ( Test-Path $destination ) {
@@ -155,18 +155,24 @@ function backupSettings() {
         Start-Sleep 1
     }
 
-    Write-Host "Done.`n`tBackup Copy:`n`t$destination\..." -ForegroundColor Green
-    Write-Host "`t`t$backupFile" -ForegroundColor Green
+    Write-Host "Done.`nBackup and Copied: $backupFile" -ForegroundColor Green
+    Write-Host "`t$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\..." -ForegroundColor Green
+    Write-Host "`t  LocalState\$backupFile`n" -ForegroundColor Green
     Start-Sleep 1
 
 }
 
 function remBackupSettings() {
+
+    Write-Host "Removing backup settings.json files ...`n" -ForegroundColor Yellow
+
     ## Remove backup settings files
     $destination = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
     Remove-Item $destination\*.backup
+    Start-Sleep 3
 
-    Write-Host "Done.`n`tBackup files were removed from:`n`t$destination" -ForegroundColor Green
+    Write-Host "Done.`nBackup files were removed from:`n`t$destination`n" -ForegroundColor Green
+    Start-Sleep 1
 
     ## Manually Edit settings.json in notepad
     # notepad $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
@@ -179,9 +185,11 @@ function remBackupSettings() {
 function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackgroundImage, 
     [string]$MyBackgroundImageAlignment, [string]$MyBackgroundImageStretchMode, [double]$MyBackgroundImageOpacity ) {
 
-    Write-Host ""
     $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-    Write-Host "Editing:`n`t$settingsLocal" -ForegroundColor Cyan
+    
+    Write-Host "`nCommence Editing: settings.json" -ForegroundColor Magenta
+    Write-Host "`t$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\..." -ForegroundColor Magenta
+    Write-Host "`t  LocalState\settings.json`n" -ForegroundColor Magenta
 
     try { 
         $mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
@@ -205,7 +213,10 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
 		}
 		
     $mySettings | ConvertTo-Json -depth 32 | set-content "$settingsLocal"
-    Write-Host "Done.`n`tEdited:`n`t$settingsLocal `n" -ForegroundColor Green
+    
+    Write-Host "Done.`nFinished Editing: settings.json" -ForegroundColor Green
+    Write-Host "`t$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\..." -ForegroundColor Green
+    Write-Host "`t  LocalState\settings.json`n" -ForegroundColor Green
     Start-Sleep 1
 }
 
@@ -262,7 +273,7 @@ function isNumeric ( $Value ) {
 function correctNumRange( $inputNo, $min, $max, $defaultNo ) {
 
     if ( isNumeric $inputNo ) {
-        if (( $inputNo -gt $max ) -or ( $inputNo -lt $min )) {
+        if (( $inputNo -le $min ) -and ( $inputNo -ge $max )) {
             Write-Host "You entered $inputNo, that value is out of range."
             $inputNo = $defaultNo
         }
@@ -281,7 +292,7 @@ function selectProfile() {
     Write-Host "Select an existing terminal profile to edit" -ForegroundColor Cyan
     Write-Host "Existing Terminal Profiles:" -ForegroundColor Yellow
     $colWidth = 32
-    $colNo = 3
+    $colNo = 2
     displayList $profileNames $colWidth $colNo
     Write-Host ""
     Write-Host ""
@@ -305,7 +316,7 @@ function selectScheme() {
     Write-Host "Select an existing color scheme to apply to profile" -ForegroundColor Cyan
     Write-Host "Installed Color Schemes:" -ForegroundColor Yellow
     $colWidth = 24
-    $colNo = 4
+    $colNo = 2
     displayList $colorSchemes $colWidth $colNo
     Write-Host ""
     Write-Host ""
@@ -328,12 +339,9 @@ function selectImage() {
 
     Write-Host ""
     Write-Host "Select an existing picture to apply to scheme" -ForegroundColor Cyan
-    Write-Host "`tThis app is set to scan for ( *.png ) images within this dir:" -ForegroundColor Cyan
-    Write-Host "`t$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\backgrounds" -ForegroundColor Cyan
-    Write-Host "`tOtherwise it will scan the parent \RoamingState directory" -ForegroundColor Cyan
     Write-Host "Available Background Images:" -ForegroundColor Yellow
     $colWidth = 24
-    $colNo = 4
+    $colNo = 2
     displayList $backgroundImage $colWidth $colNo
     Write-Host ""
     Write-Host ""
@@ -409,7 +417,7 @@ function selectAplha() {
     Write-Host ""
     Write-Host "Select the opacity alpha transparency to apply to the background picture" -ForegroundColor Cyan
     Write-Host "Available Opacity Options:" -ForegroundColor Yellow
-    Write-Host "Select a number between [ 0 - 1 ]`n`tAim arround ( 0.1 - 0.3 ) for a more discrete look.`n"
+    Write-Host "Select a number between [ 0.01 - 1.00 ]`n`tAim arround ( 0.05 - 0.25 ) for a discrete watermerked look.`n"
     $alpha = Read-Host "Enter number"
     $alpha = correctNumRange $alpha 0 1 0.2
     Write-Host "Transparency value will be: "$alpha -ForegroundColor DarkYellow
@@ -451,7 +459,7 @@ function resetProfileThemes() {
 
 function titleHeader() {
     Write-Host "#########################################################################"
-    Write-Host "## Windows Terminal Theme Selection "
+    Write-Host "## Windows Terminal Theme Selection " -ForegroundColor DarkYellow
     Write-Host "#########################################################################"
     Write-Host "##"
     Write-Host "## About:"
@@ -462,10 +470,9 @@ function titleHeader() {
     Write-Host "##`thttps://github.com/mezcel/terminal-profile.git"
     Write-Host "##"
     Write-Host "## Flags:"
-    Write-Host "##`t--help`t`tHelp instructions (n/a)"
-    Write-Host "##`t--reset`t`tRestres profiles back to my defaults "
+    Write-Host "##`t--help`t`tHelp instructions"
+    Write-Host "##`t--reset`t`tRestores profiles back to my defaults "
     Write-Host "##`t--rem-backups`tCleans out all temporary backups"
-    Write-Host "##`t--import`tImport a json file theme (n/a)"
     Write-Host "#########################################################################"
     Write-Host "`nChanges to your settings.json will not occur until confirmation at the end.`n" -ForegroundColor Magenta
 }
@@ -475,7 +482,7 @@ function helpDisplay( [string]$scriptName ) {
     #$scriptName = $MyInvocation.MyCommand.Name
 
     Write-Host "#########################################################################"
-    Write-Host "## Windows Terminal Theme Selection ( Help / Notes ) "
+    Write-Host "## Windows Terminal Theme Selection ( Help / Notes ) " -ForegroundColor Yellow
     Write-Host "#########################################################################"
     Write-Host "##"
     Write-Host "## Launch:"
@@ -487,9 +494,15 @@ function helpDisplay( [string]$scriptName ) {
     Write-Host "##`t.\$scriptName --rem-backups`t## Delete backup saves"
     Write-Host "##"
     Write-Host "## Json Parsing:"
-    Write-Host "## `tJson is parsed using Powershell's built-in Json parser."
+    Write-Host "##`tJson is parsed using Powershell's built-in Json parser."
     Write-Host "##`tThe parser will return errors if it detects comments."
     Write-Host "##`tDelete comments from settings.json for this script to work."
+    Write-Host "##"
+    Write-Host "## Picture files:"
+    Write-Host "##`tMultimedia files should be stored within: %APPDATA%"
+    Write-Host "##`tMake a filder named backgrounds"
+    Write-Host "##`tStore *.png files in that dir: %APPDATA%\backgrounds\"
+    Write-Host "##"
     Write-Host "#########################################################################`n"
 }
 
@@ -513,9 +526,9 @@ function main() {
     ## Picture Opacity/Transparency
     $alpha = selectAplha
 
-    Write-Host "`n::"
+    Write-Host "`n:::::::::::::::::::::::::"
     Write-Host ":: Confirmation Preview"
-    Write-Host "::"
+    Write-Host ":::::::::::::::::::::::::"
 
     ## Preview profile before changes are made
     showProfile $name
@@ -559,9 +572,7 @@ Clear-Host
 ## Title header
 titleHeader
 
-$inputArgs.ToString()
 switch -Exact ( $inputArgs ) {
-
     "--reset" {         ## Reset to my defaults
         resetProfileThemes; Break }
     "--rem-backups" {   ## rem backup settings.json
