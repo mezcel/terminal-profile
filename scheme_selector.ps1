@@ -363,6 +363,10 @@ function main() {
     ## Picture Opacity/Transparency
     $alpha = selectAplha
 
+    Write-Host "`n::"
+    Write-Host ":: Confirmation Preview"
+    Write-Host "::"
+
     ## Preview profile before changes are made
     showProfile $name
 
