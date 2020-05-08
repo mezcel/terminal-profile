@@ -23,6 +23,8 @@
     - Processes actively running in Windows Terminal, including the installer script, will terminate.
     - Run installer using Win10's native Powershell or Command Prompt clients.
     ```
+    * ```.bat``` script works out of the box on any Win machine
+    * ```.ps1``` requires permissions. At least: ```Set-ExecutionPolicy RemoteSigned -Scope CurrentUser```
 
 * **Theme selector** script [scheme_selector.ps1](scheme_selector.ps1)
     * The settings.json file must be cleared of all comments

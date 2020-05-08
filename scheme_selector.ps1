@@ -405,7 +405,7 @@ function selectStretch() {
     $menuNumber = Read-Host "Enter number"
     $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
     $stretch = $imageStretch[$menuNumber]
-    Write-Host "Streatch value will be: "$stretch -ForegroundColor DarkYellow
+    Write-Host "Stretch value will be: "$stretch -ForegroundColor DarkYellow
     Write-Host ""
     Start-Sleep 1
 
@@ -457,12 +457,16 @@ function resetProfileThemes() {
 }
 
 
-function titleHeader() {
+function titleHeader( [string]$scriptName ) {
+
+    #$scriptName = $MyInvocation.MyCommand.Name
+
     Write-Host "#########################################################################"
     Write-Host "## Windows Terminal Theme Selection " -ForegroundColor DarkYellow
     Write-Host "#########################################################################"
     Write-Host "##"
     Write-Host "## About:"
+    Write-Host "##`t$scriptName"
     Write-Host "##`tThis script will set up a profile theme using existing resources"
     Write-Host "##"
     Write-Host "## Author:"
@@ -500,7 +504,7 @@ function helpDisplay( [string]$scriptName ) {
     Write-Host "##"
     Write-Host "## Picture files:"
     Write-Host "##`tMultimedia files should be stored within: %APPDATA%"
-    Write-Host "##`tMake a filder named backgrounds"
+    Write-Host "##`tMake a folder named backgrounds"
     Write-Host "##`tStore *.png files in that dir: %APPDATA%\backgrounds\"
     Write-Host "##"
     Write-Host "#########################################################################`n"
@@ -570,7 +574,8 @@ function main() {
 Clear-Host
 
 ## Title header
-titleHeader
+$scriptName = $MyInvocation.MyCommand.Name
+titleHeader $scriptName
 
 switch -Exact ( $inputArgs ) {
     "--reset" {         ## Reset to my defaults
