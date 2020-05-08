@@ -1,0 +1,22 @@
+{
+	"name":  "Apothecary White",
+	"background":  "#e8e9f0",
+	"black":  "#3d3e4d",
+	"blue":  "#ac0d84",
+	"cyan":  "#4d3092",
+	"foreground":  "#6862a3",
+	"green":  "#0c972f",
+	"purple":  "#3e5361",
+	"red":  "#b94e10",
+	"white":  "#b5b0fd",
+	"yellow":  "#cc717d",
+	"brightBlack":  "#bfc3cf",
+	"brightBlue":  "#443752",
+	"brightCyan":  "#8c8a9e",
+	"brightGreen":  "#753681",
+	"brightPurple":  "#c773ae",
+	"brightRed":  "#f85a5a",
+	"brightWhite":  "#58581f",
+	"brightYellow":  "#747462",
+	"cursorColor":  "#710275"
+}

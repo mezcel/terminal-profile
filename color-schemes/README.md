@@ -62,7 +62,7 @@ My custom themes optimized for Vim's C syntax, folds, and highlighting, coloring
 I also named them after ( Games Workshop / Citadel ) paint colors
 
 * [Lucius Lilac Dark]( lucius-lilac-dark.json ) - A forked modification of [Dracula]( https://draculatheme.com/windows-terminal )
-* [Apothecary White Light]( apothecary-white-light.json )
+* [Apothecary White]( apothecary-white.json )
 * [Nocturne Green Dark]( nocturne-green-dark.json )
 * [Soulstone Blue]( soulstone-blue.json )
 * [Averland Sunset Yellow]( averland-sunset-yellow.json ) A yellow theme
