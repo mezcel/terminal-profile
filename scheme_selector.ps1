@@ -273,7 +273,7 @@ function isNumeric ( $Value ) {
 function correctNumRange( $inputNo, $min, $max, $defaultNo ) {
 
     if ( isNumeric $inputNo ) {
-        if (( $inputNo -le $min ) -and ( $inputNo -ge $max )) {
+        if (( $inputNo -lt $min ) -and ( $inputNo -gt $max )) {
             Write-Host "You entered $inputNo, that value is out of range."
             $inputNo = $defaultNo
         }
