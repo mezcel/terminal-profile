@@ -441,7 +441,7 @@ function resetProfileThemes() {
     writeProfile "Git Bash" "Violet Light" "git-orange.png" "bottomRight" "none" 0.2
 
     Write-Host "`nResetting Debian ...`n" -ForegroundColor Magenta
-    writeProfile "Debian" "Apothecary White Light" "debian-red-smaller.png" "bottomRight" "none" 0.2
+    writeProfile "Debian" "Apothecary White" "debian-red-smaller.png" "bottomRight" "none" 0.2
 
     Write-Host "`nResetting Windows PowerShell ...`n" -ForegroundColor Magenta
     writeProfile "Windows PowerShell" "Campbell Powershell" "ps.png" "bottomRight" "none" 0.2
@@ -476,7 +476,7 @@ function titleHeader( [string]$scriptName ) {
     Write-Host "## Flags:"
     Write-Host "##`t--help`t`tHelp instructions"
     Write-Host "##`t--reset`t`tRestores profiles back to my defaults "
-    Write-Host "##`t--rem-backups`tCleans out all temporary backups"
+    Write-Host "##`t--del-backups`tCleans out all temporary backups"
     Write-Host "#########################################################################"
     Write-Host "`nChanges to your settings.json will not occur until confirmation at the end.`n" -ForegroundColor Magenta
 }
@@ -495,7 +495,7 @@ function helpDisplay( [string]$scriptName ) {
     Write-Host "## Launch with Flags:"
     Write-Host "##`t.\$scriptName --help`t`t## Help instructions"
     Write-Host "##`t.\$scriptName --reset`t`t## Resets profile styles"
-    Write-Host "##`t.\$scriptName --rem-backups`t## Delete backup saves"
+    Write-Host "##`t.\$scriptName --del-backups`t## Delete backup saves"
     Write-Host "##"
     Write-Host "## Json Parsing:"
     Write-Host "##`tJson is parsed using Powershell's built-in Json parser."
@@ -503,9 +503,11 @@ function helpDisplay( [string]$scriptName ) {
     Write-Host "##`tDelete comments from settings.json for this script to work."
     Write-Host "##"
     Write-Host "## Picture files:"
-    Write-Host "##`tMultimedia files should be stored within: %APPDATA%"
+    Write-Host "##`tMultimedia files should be stored within:"
+    Write-Host "##`t`t$env:LOCALAPPDATA\Packages\"
+    Write-Host "##`t`tMicrosoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\"
     Write-Host "##`tMake a folder named backgrounds"
-    Write-Host "##`tStore *.png files in that dir: %APPDATA%\backgrounds\"
+    Write-Host "##`tStore *.png files in that dir"
     Write-Host "##"
     Write-Host "#########################################################################`n"
 }
@@ -581,11 +583,11 @@ switch -Exact ( $inputArgs ) {
     "--reset" {         ## Reset to my defaults
         resetProfileThemes
 		Break; }
-		
-    "--rem-backups" {   ## rem backup settings.json
+    
+    "--del-backups" {   ## rem backup settings.json
         remBackupSettings
 		Break; }
-		
+    
     "--help" {          ## runtime help
         ## the file name of this .ps1 script
         $scriptName = $MyInvocation.MyCommand.Name

@@ -37,7 +37,7 @@
     ## Launch with Flags:
     .\scheme_selector.ps1 --help            ## Help instructions
     .\scheme_selector.ps1 --reset           ## Restores profiles back to my defaults
-    .\scheme_selector.ps1 --rem-backups     ## Cleans out all temporary backups"
+    .\scheme_selector.ps1 --del-backups     ## Cleans out all temporary backups"
     ```
 
 ### Manual Install ( drag-n-drop )
