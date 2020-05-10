@@ -99,7 +99,7 @@
             {
                 "guid":  "{0bd18f19-d872-4352-b4b6-52c3a186335b}",
                 "hidden":  false,
-                "name":  "Node",
+                "name":  "Node REPL",
                 "icon":  "ms-appdata:///roaming/icons/node.ico",
                 "commandline":  "node.exe",
                 "colorScheme":  "Tango Dark",
