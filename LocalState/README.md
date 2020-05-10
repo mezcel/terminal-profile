@@ -31,3 +31,16 @@ Each terminal profile is indexed with a GUID. This should be unique for each use
 ## windows powershell and type
 [guid]::NewGuid()
 ```
+
+Example:
+
+```json
+"profiles":  {
+    "list":  [
+        {
+            "guid": "{ 680507ee-fd3b-467e-a55b-1bc95b40a025 }",
+            "name": "My Terminal Profile Name"
+        }
+    ]
+}
+```
