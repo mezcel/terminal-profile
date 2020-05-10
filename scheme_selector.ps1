@@ -21,10 +21,17 @@ function knownParsingError() {
     $yn = Read-Host "Do you want to open and edit the settings.json file at this time? [ y / N ] "
     if ( $yn -eq "y" ) {
         $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-        notepad $settingsLocal
-        #code $settingsLocal
-    } 
 
+        ## launch an available text editor
+        if ( Get-Command code -ErrorAction 'SilentlyContinue' ) { 
+            code $settingsLocal 
+        } elseif ( [System.IO.File]::Exists( "C:\Program Files\Notepad++\notepad++.exe" ) ) {
+            start notepad++ $settingsLocal 
+        } else {
+            notepad $settingsLocal
+        }
+    } 
+    Write-Host ""
     Exit
 }
 
@@ -37,7 +44,7 @@ function setSchemeArray() {
 	$outputArray = @()
 
 	## List of Windows Terminal's factory default color schemes
-	$defaultSchemesArr = @( "Campbell","Campbell Powershell", "Vintage", "One Half Dark", "One Half Light", "Solarized Dark", "Solarized Light", "Tango Dark", "Tango Light" )
+	$defaultSchemesArr = @( "Campbell", "Campbell Powershell", "Vintage", "One Half Dark", "One Half Light", "Solarized Dark", "Solarized Light", "Tango Dark", "Tango Light" )
 	$outputArray += ( $defaultSchemesArr )
 
     $settingsLocal = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
