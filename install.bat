@@ -22,9 +22,24 @@ ECHO.
 :::: close Windows Terminal
 ECHO :: Step 1. Close any open Windows Terminal sessions.
 :stopWT
+
     ::taskkill /IM "WindowsTerminal.exe"
     tasklist /fi "imagename eq WindowsTerminal.exe" |find ":" > nul
-    if errorlevel 1 taskkill /f /im "WindowsTerminal.exe"
+    if errorlevel 1 (
+        ECHO.
+        ECHO Windows Terminal is running.
+        ECHO    Launch this script again from a stand alone Command Prompt.
+        ECHO    It is generally a good practice not make changes to an application while it is running.
+        ECHO    This script is going to terminate all instances of Windows Terminal. ( just for redundant safety )
+        ECHO    Finish whatever is going on in any other tabs or WT sessions before continuing.
+        ECHO    Execute intall.bat again in any other Command Prompt terminal.
+        ECHO.
+
+        set /p pausePrompt="Press ENTER to Launch an new instance of Command Prompt and close Windows Terminal."
+        start cmd
+
+        taskkill /f /im "WindowsTerminal.exe" )
+
     ECHO :: done.
     ECHO.
 
