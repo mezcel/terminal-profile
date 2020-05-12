@@ -5,7 +5,7 @@
 * A minimalistic scheme bundle for [Windows Terminal]( https://github.com/microsoft/terminal ).
 * Enclosed are: 
     * json color schemes, icons, images, and a config file.
-    * I also made an [installer]( install.ps1 ) and a [theme switcher]( scheme_selector.ps1 ).
+    * I also made an [installer]( #installer--shell-scripts- ) and a [theme switcher]( #31-wizard--powershell-script- ).
 
 [screenshots]( https://gist.github.com/mezcel/b4ce7f783597fb0ee97dfe66a9239175#file-0-readme-md )
 
@@ -14,9 +14,9 @@ gist: ```https://gist.github.com/b4ce7f783597fb0ee97dfe66a9239175.git```
 
 ## 2.0 Install
 
-### Installer ( shell scripts )
+### 2.1 Installer ( shell scripts )
 
-* **Execute**, either **[install.ps1](install.ps1)** or **[install.bat](install.bat)**, from this repo's root directory, via Command Prompt or Powershell.
+* **Execute**, either <u>**[install.ps1](install.ps1)**</u> or <u>**[install.bat](install.bat)**</u>, from this repo's root directory, via Command Prompt or Powershell.
 
     * ```.bat``` script works out of the box on anyone's Win10 machine
     * ```.ps1``` requires Powershell permissions.
@@ -24,7 +24,17 @@ gist: ```https://gist.github.com/b4ce7f783597fb0ee97dfe66a9239175.git```
         Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
         ```
 
-* **Theme selector** script [scheme_selector.ps1](scheme_selector.ps1)
+### 2.2 Manual Install ( drag-n-drop )
+
+* [Install multimedia graphics](RoamingState/README.md)
+* [Copy my configuration settings](LocalState/README.md)
+* [Drag and drop color schemes](color-schemes/README.md) ( *Redundant* )
+
+## 3.0 Customize
+
+### 3.1 Wizard ( Powershell script )
+
+* **Theme selector** script <u>**[scheme_selector.ps1](scheme_selector.ps1)**</u>
     * The settings.json file must be cleared of all comments
         * Powershell's json parser does not like comments.
 
@@ -38,13 +48,11 @@ gist: ```https://gist.github.com/b4ce7f783597fb0ee97dfe66a9239175.git```
     .\scheme_selector.ps1 --del-backups     ## Cleans out all temporary backups"
     ```
 
-### Manual Install ( drag-n-drop )
+### 3.2 Manually Edit Settings
 
-* [Install multimedia graphics](RoamingState/README.md)
-* [Copy my configuration settings](LocalState/README.md)
-* [Drag and drop color schemes](color-schemes/README.md) ( *Redundant* )
+> Find the dropdown in Windows Terminal and click setting. Type in whatever features you know your system supports.
 
-## 3.0 Notes
+## 4.0 Notes
 
 ### CLI Arguments ( PS or CMD )
 
