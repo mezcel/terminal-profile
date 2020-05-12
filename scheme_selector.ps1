@@ -100,13 +100,11 @@ function setProfileNamesArray() {
 }
 
 function setAlignmentArray() {
-    $outputArray = @()
     $outputArray = @( "center", "top", "bottom", "left", "right", "topRight", "topLeft",  "bottomRight", "bottomLeft" )
     return $outputArray
 }
 
 function setStretchArray() {
-    $outputArray = @()
     $outputArray = @( "none", "fill", "uniform", "uniformToFill" )
     return $outputArray
 }
@@ -119,13 +117,13 @@ function displayList( [string[]] $inputArray, [int] $minColWidth, [int] $noCols 
 
 	for( $i = 0; $i -lt $inputArray.length; $i++ ) {
 		$totalCount = $i
-		$newLine = $i % $noCols
+		$newLine    = $i % $noCols
 		
-		$tabChar = ""
-		$string = $inputArray[$i].ToString()
-		$charCount = ($string.ToCharArray() | Where-Object {$_} | Measure-Object).Count
+		$tabChar    = ""
+		$string     = $inputArray[$i].ToString()
+		$charCount  = ($string.ToCharArray() | Where-Object {$_} | Measure-Object).Count
 
-		$colDiff = $minColWidth - $charCount
+		$colDiff    = $minColWidth - $charCount
 		for( $j = 0; $j -le $colDiff; $j++ ) {
 			$tabChar = $tabChar + " "
 		}
@@ -211,11 +209,11 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
 
 	$mySettings.profiles.list | % {
 			if( $_.name -eq $MyName ) {
-				$_.colorscheme = $MyColorscheme
-				$_.backgroundImage = "$appPath/$MyBackgroundImage"
-				$_.backgroundImageAlignment = $MyBackgroundImageAlignment
+				$_.colorscheme                = $MyColorscheme
+				$_.backgroundImage            = "$appPath/$MyBackgroundImage"
+				$_.backgroundImageAlignment   = $MyBackgroundImageAlignment
 				$_.backgroundImageStretchMode = $MyBackgroundImageStretchMode
-				$_.backgroundImageOpacity = $MyBackgroundImageOpacity
+				$_.backgroundImageOpacity     = $MyBackgroundImageOpacity
 			}
 		}
 		
@@ -280,12 +278,14 @@ function isNumeric ( $Value ) {
 function correctNumRange( $inputNo, $min, $max, $defaultNo ) {
 
     if ( isNumeric $inputNo ) {
-        if (( $inputNo -lt $min ) -and ( $inputNo -gt $max )) {
-            Write-Host "You entered $inputNo, that value is out of range."
+        if (( $inputNo -lt $min ) -or ( $inputNo -gt $max )) {
+            Write-Host "`tYou entered ""$inputNo"", that value is out of range." -ForegroundColor Red
+            Write-Host "`tSet to default $defaultNo" -ForegroundColor Red
             $inputNo = $defaultNo
         }
     } else {
-        Write-Host "You entered $inputNo, that value is out of range."
+        Write-Host "`tYou entered ""$inputNo"", that value is out of range." -ForegroundColor Red
+        Write-Host "`tSet to default $defaultNo" -ForegroundColor Red
         $inputNo = $defaultNo
     }
 
@@ -298,18 +298,16 @@ function selectProfile() {
 
     Write-Host "Select an existing terminal profile to edit" -ForegroundColor Cyan
     Write-Host "Existing Terminal Profiles:" -ForegroundColor Yellow
-    $colWidth = 32
-    $colNo = 2
+    $colWidth   = 32
+    $colNo      = 2
     displayList $profileNames $colWidth $colNo
-    Write-Host ""
-    Write-Host ""
-    $arrLen = $profileNames.length - 1
+    Write-Host "`n"
+    $arrLen     = $profileNames.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
     $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
-    $name = $profileNames[$menuNumber]
-    Write-Host "The profile to be edited will be: "$name -ForegroundColor DarkYellow
-    Write-Host ""
+    $name       = $profileNames[$menuNumber]
+    Write-Host "  The profile to be edited will be: $name `n" -ForegroundColor DarkYellow
     Start-Sleep 1
 
     return $name
@@ -319,22 +317,18 @@ function selectScheme() {
 
     $colorSchemes = @(setSchemeArray)
 
-    Write-Host ""
-    Write-Host "Select an existing color scheme to apply to profile" -ForegroundColor Cyan
+    Write-Host "`nSelect an existing color scheme to apply to profile" -ForegroundColor Cyan
     Write-Host "Installed Color Schemes:" -ForegroundColor Yellow
-    $colWidth = 24
-    $colNo = 2
+    $colWidth   = 24
+    $colNo      = 2
     displayList $colorSchemes $colWidth $colNo
-    Write-Host ""
-    Write-Host ""
-    $arrLen = $colorSchemes.length - 1
-    Write-Host "Select a number between [ 0 - $arrLen ] "
-    Write-Host "`tNote: Most color schemes look bad on Powershell."
+    $arrLen     = $colorSchemes.length - 1
+    Write-Host "`n`nSelect a number between [ 0 - $arrLen ] "
+    Write-Host "`tNote: Most of 'MY' color schemes will look bad on Powershell.`n"
     $menuNumber = Read-Host "Enter number"
     $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
-    $color = $colorSchemes[$menuNumber]
-    Write-Host "Color scheme will be set to: "$color -ForegroundColor DarkYellow
-    Write-Host ""
+    $color      = $colorSchemes[$menuNumber]
+    Write-Host "  Color scheme will be set to: $color `n" -ForegroundColor DarkYellow
     Start-Sleep 1
 
     return $color
@@ -344,27 +338,24 @@ function selectImage() {
 
     $backgroundImage = @(setImageArray)
 
-    Write-Host ""
-    Write-Host "Select an existing picture to apply to scheme" -ForegroundColor Cyan
+    Write-Host "`nSelect an existing picture to apply to scheme" -ForegroundColor Cyan
     Write-Host "Available Background Images:" -ForegroundColor Yellow
-    $colWidth = 24
-    $colNo = 2
+    $colWidth   = 24
+    $colNo      = 2
     displayList $backgroundImage $colWidth $colNo
-    Write-Host ""
-    Write-Host ""
-    $arrLen = $backgroundImage.length - 1
+    Write-Host "`n"
+    $arrLen     = $backgroundImage.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
     $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
-    $pic = $backgroundImage[$menuNumber]
+    $pic        = $backgroundImage[$menuNumber]
 
     $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
     if ( Test-Path -Path "$roamingDir\backgrounds" ) {
-        Write-Host "Background image will be: ms-appdata:///roaming/backgrounds/$pic" -ForegroundColor DarkYellow
+        Write-Host "  Background image will be:`n`tms-appdata:///roaming/backgrounds/$pic`n" -ForegroundColor DarkYellow
     } else {
-        Write-Host "Background image will be: ms-appdata:///roaming/$pic" -ForegroundColor DarkYellow
+        Write-Host "  Background image will be:`n`tms-appdata:///roaming/$pic`n" -ForegroundColor DarkYellow
     }
-    Write-Host ""
     
     Start-Sleep 1
 
@@ -375,21 +366,18 @@ function selectAlignment() {
 
     $imageAlign = @(setAlignmentArray)
 
-    Write-Host ""
-    Write-Host "Select an alignment to apply to background picture" -ForegroundColor Cyan
+    Write-Host "`nSelect an alignment to apply to background picture" -ForegroundColor Cyan
     Write-Host "Available Alignment Options:" -ForegroundColor Yellow
-    $colWidth = 12
-    $colNo = 3
+    $colWidth   = 12
+    $colNo      = 3
     displayList $imageAlign $colWidth $colNo
-    Write-Host ""
-    Write-Host ""
-    $arrLen = $imageAlign.length - 1
+    Write-Host "`n"
+    $arrLen     = $imageAlign.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
     $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
-    $align = $imageAlign[$menuNumber]
-    Write-Host "Alignment value will be: "$align -ForegroundColor DarkYellow
-    Write-Host ""
+    $align      = $imageAlign[$menuNumber]
+    Write-Host "  Alignment value will be: $align `n" -ForegroundColor DarkYellow
     Start-Sleep 1
 
     return $align
@@ -399,21 +387,18 @@ function selectStretch() {
 
     $imageStretch = @(setStretchArray)
 
-    Write-Host ""
-    Write-Host "Select a stretch to apply to background picture" -ForegroundColor Cyan
+    Write-Host "`nSelect a stretch to apply to background picture" -ForegroundColor Cyan
     Write-Host "Available Stretch Options:" -ForegroundColor Yellow
-    $colWidth = 12
-    $colNo = 2
+    $colWidth   = 12
+    $colNo      = 2
     displayList $imageStretch $colWidth $colNo
-    Write-Host ""
-    Write-Host ""
-    $arrLen = $imageStretch.length - 1
+    Write-Host "`n"
+    $arrLen     = $imageStretch.length - 1
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
     $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
-    $stretch = $imageStretch[$menuNumber]
-    Write-Host "Stretch value will be: "$stretch -ForegroundColor DarkYellow
-    Write-Host ""
+    $stretch    = $imageStretch[$menuNumber]
+    Write-Host "  Stretch value will be: $stretch `n" -ForegroundColor DarkYellow
     Start-Sleep 1
 
     return $stretch
@@ -421,14 +406,12 @@ function selectStretch() {
 
 function selectAplha() {
 
-    Write-Host ""
-    Write-Host "Select the opacity alpha transparency to apply to the background picture" -ForegroundColor Cyan
+    Write-Host "`nSelect the opacity alpha transparency to apply to the background picture" -ForegroundColor Cyan
     Write-Host "Available Opacity Options:" -ForegroundColor Yellow
-    Write-Host "Select a number between [ 0.01 - 1.00 ]`n`tAim around ( 0.05 - 0.25 ) for a discrete watermarked look.`n"
+    Write-Host "`nSelect a number between [ 0.01 - 1.00 ]`n`tAim around ( 0.05 - 0.25 ) for a discrete watermark look.`n"
     $alpha = Read-Host "Enter number"
     $alpha = correctNumRange $alpha 0 1 0.2
-    Write-Host "Transparency value will be: "$alpha -ForegroundColor DarkYellow
-    Write-Host ""
+    Write-Host "  Transparency value will be: $alpha `n" -ForegroundColor DarkYellow
     Start-Sleep 1
 
     return $alpha
@@ -462,7 +445,6 @@ function resetProfileThemes() {
     Write-Host "`nResetting Developer CMD for VS 2019 ...`n" -ForegroundColor Magenta
     writeProfile "Developer CMD for VS 2019" "VS Code" "vs-white.png" "bottomRight" "none" 0.2
 }
-
 
 function titleHeader( [string]$scriptName ) {
 
@@ -522,19 +504,11 @@ function helpDisplay( [string]$scriptName ) {
 function main() {
 
     ## Profile
-    $name = selectProfile
-
-    ## Color Scheme
-    $color = selectScheme
-
-    ## Background Picture
-    $pic = selectImage
-
-    ## Picture Alignment
-    $align = selectAlignment
-
-    ## Picture Stretch
-    $stretch = selectStretch
+    $name    = selectProfile    <# Profile #>
+    $color   = selectScheme     <# Color Scheme #>
+    $pic     = selectImage      <# Background Picture #>
+    $align   = selectAlignment  <# Picture Alignment #>
+    $stretch = selectStretch    <# Picture Stretch #>
 
     ## Picture Opacity/Transparency
     $alpha = selectAplha
@@ -564,13 +538,13 @@ function main() {
         }
 
         if ( $yn -eq "no" ) {
-            Write-Host "`nNo Changes were applied. Try again when you are ready." -ForegroundColor Yellow
-            Write-Host "`tThanks for playing. Bye :)" -ForegroundColor Green
+            Write-Host "`nNo changes will be made. Settings will remain as they were." -ForegroundColor Yellow
+            Write-Host "`tThank you for playing. Bye :)`n" -ForegroundColor Green
         }
 
         if ( ( $yn -ne "yes") -and ( $yn -ne "no" ) ) {
             Write-Host "`nTry again." -ForegroundColor Yellow
-            Write-Host "`tYou entered: $yn`n" -ForegroundColor Yellow
+            Write-Host "`tYou entered: ""$yn"" `n" -ForegroundColor Yellow
         }
 
     }
@@ -601,9 +575,7 @@ switch -Exact ( $inputArgs ) {
         helpDisplay $scriptName
         Break; }
 		
-    Default {			## Main UI Theme Selector
-		main 
-		}
+    Default { main <# Main UI Theme Selector #> }
 
 }
 

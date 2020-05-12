@@ -102,12 +102,10 @@ function main( [string] $scriptName ) {
     #Stop-Process -Name 'WindowsTerminal'
     closeWT $scriptName
 
-    Write-Host ""
-    Write-Host "Step 2. Copy and backup the RoamingState directory." -ForegroundColor Yellow
+    Write-Host "`nStep 2. Copy and backup the RoamingState directory." -ForegroundColor Yellow
     copyGraphics
 
-    Write-Host ""
-    Write-Host "Step 3. Copy and backup the settings.json file." -ForegroundColor Yellow
+    Write-Host "`nStep 3. Copy and backup the settings.json file." -ForegroundColor Yellow
     copySettings
 }
 
@@ -121,5 +119,5 @@ main $scriptName
 Write-Host ""
 Write-Host "done." -ForegroundColor Green
 Write-Host "Check: $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe" -ForegroundColor Cyan
-Write-Host "    \RemoteState and \LocalState" -ForegroundColor Cyan
+Write-Host "`t\RemoteState and \LocalState" -ForegroundColor Cyan
 Write-Host ""
