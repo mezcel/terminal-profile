@@ -5,7 +5,7 @@
 * A minimalistic scheme bundle for [Windows Terminal]( https://github.com/microsoft/terminal ).
 * Enclosed are: 
     * json color schemes, icons, images, and a config file.
-    * I also made an [installer]( #installer--shell-scripts- ) and a [theme switcher]( #31-wizard--powershell-script- ).
+    * I also made an **[installer]( #21-installer--shell-scripts- )** and a **[theme switcher]( #31-wizard--powershell-script- )**.
 
 [screenshots]( https://gist.github.com/mezcel/b4ce7f783597fb0ee97dfe66a9239175#file-0-readme-md )
 
@@ -16,7 +16,7 @@ gist: ```https://gist.github.com/b4ce7f783597fb0ee97dfe66a9239175.git```
 
 ### 2.1 Installer ( shell scripts )
 
-* **Execute**, either <u>**[install.ps1](install.ps1)**</u> or <u>**[install.bat](install.bat)**</u>, from this repo's root directory, via Command Prompt or Powershell.
+* **Execute**, either **[install.ps1](install.ps1)** or **[install.bat](install.bat)**, from this repo's root directory, via Command Prompt or Powershell.
 
     * ```.bat``` script works out of the box on anyone's Win10 machine
     * ```.ps1``` requires Powershell permissions.
@@ -34,7 +34,7 @@ gist: ```https://gist.github.com/b4ce7f783597fb0ee97dfe66a9239175.git```
 
 ### 3.1 Wizard ( Powershell script )
 
-* **Theme selector** script <u>**[scheme_selector.ps1](scheme_selector.ps1)**</u>
+* **Theme selector** script **[scheme_selector.ps1](scheme_selector.ps1)**
     * The settings.json file must be cleared of all comments
         * Powershell's json parser does not like comments.
 
