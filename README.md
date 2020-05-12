@@ -26,9 +26,9 @@
 
 ### 2.2 Manual Install ( drag-n-drop )
 
-* [Install multimedia graphics](RoamingState/README.md)
-* [Copy my configuration settings](LocalState/README.md)
-* [Drag and drop color schemes](color-schemes/README.md) ( *Redundant* )
+* [Drag-n-drop images](RoamingState/README.md)
+* [Copy settings file](LocalState/README.md)
+* [Copy color schemes](color-schemes/README.md) ( *Redundant* )
 
 ## 3.0 Customize
 
@@ -50,7 +50,7 @@
 
 ### 3.2 Manually Edit Settings
 
-> Find the dropdown in Windows Terminal and click setting. Type in whatever features you know your system supports.
+> Find the dropdown menu in Windows Terminal and click ```Settings```. A text editor will pop up with the ```settings.json``` file loaded. Manually type in whatever features you know your system supports.
 
 ## 4.0 Notes
 
