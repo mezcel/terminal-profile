@@ -1,6 +1,6 @@
 {
     "$schema"           : "https://aka.ms/terminal-profiles-schema",
-    "defaultProfile"    : "{680507ee-fd3b-467e-a55b-1bc95b40a025}", 
+    "defaultProfile"    : "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
 
     "profiles": {
         "defaults": {},
@@ -408,6 +408,28 @@
             "background":  "#4e2120",
             "foreground":  "#fd8585",
             "cursorColor":  "#8f8239"
+        },
+        {
+            "name":  "Spring",
+            "black":  "#000000",
+            "red":  "#ff4d83",
+            "green":  "#1f8c3b",
+            "yellow":  "#1fc95b",
+            "blue":  "#1dd3ee",
+            "purple":  "#8959a8",
+            "cyan":  "#3e999f",
+            "white":  "#ffffff",
+            "brightBlack":  "#000000",
+            "brightRed":  "#ff0021",
+            "brightGreen":  "#1fc231",
+            "brightYellow":  "#d5b807",
+            "brightBlue":  "#15a9fd",
+            "brightPurple":  "#8959a8",
+            "brightCyan":  "#3e999f",
+            "brightWhite":  "#ffffff",
+            "background":  "#ffffff",
+            "foreground":  "#4d4d4c",
+            "cursorColor":  "#be7026"
         }
         
     ],

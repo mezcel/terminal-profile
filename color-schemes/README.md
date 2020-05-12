@@ -74,6 +74,7 @@ I also named them after ( Games Workshop / Citadel ) paint colors
 * [Ubuntu]( https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/terminal/Ubuntu.terminal )
 * [Dracula]( https://draculatheme.com/windows-terminal )
 * [Nord]( https://compiledexperience.com/blog/posts/windows-terminal-nord )
+* [Spring]( https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/windowsterminal/Spring.json )
 * [VS Code]( https://github.com/adstep/vscode-windows-terminal-theme )
 * [Violet Light]( https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/windowsterminal/Violet%20Light.json )
     * this is really Sepia or Solarized Light

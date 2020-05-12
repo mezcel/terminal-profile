@@ -279,12 +279,12 @@ function correctNumRange( $inputNo, $min, $max, $defaultNo ) {
 
     if ( isNumeric $inputNo ) {
         if (( $inputNo -lt $min ) -and ( $inputNo -gt $max )) {
-            Write-Host "`tYou entered ""$inputNo"", that value is beyond the range of ( $min to $max )." -ForegroundColor Red
+            Write-Host "`tYou entered ""$inputNo"", that value is not within ( $min to $max )." -ForegroundColor Red
             Write-Host "`tSet to default $defaultNo" -ForegroundColor Red
             $inputNo = $defaultNo
         }
     } else {
-        Write-Host "`tYou entered ""$inputNo"", that value is beyond the range of ( $min to $max )." -ForegroundColor Red
+        Write-Host "`tYou entered ""$inputNo"", that value is not within ( $min to $max )." -ForegroundColor Red
         Write-Host "`tSet to default $defaultNo" -ForegroundColor Red
         $inputNo = $defaultNo
     }
