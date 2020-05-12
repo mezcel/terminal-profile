@@ -10,7 +10,7 @@
                 "hidden"                        : false,
                 "name"                          : "Git Bash",
                 "commandline"                   : "C:/Program Files/Git/usr/bin/bash.exe --login",
-                "icon"                          : "C:/Program Files/Git/mingw64/share/git/git-for-windows.ico",
+                "icon"                          : "ms-appdata:///roaming/icons/git.ico",
                 "startingDirectory"             : "%USERPROFILE%",
                 "backgroundImage"               : "ms-appdata:///roaming/backgrounds/git-orange.png",
                 "backgroundImageAlignment"      : "bottomRight",
