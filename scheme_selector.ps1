@@ -263,7 +263,7 @@ function previewChanges( [string]$name, [string]$color, [string]$pic, [string]$a
     Write-Host "Selection Summary:`n" -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tProfile Name`t`t: $name" -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tScheme Color`t`t: $color " -ForegroundColor Red -BackgroundColor Black
-    Write-Host "`tBackground Picture`t: ms-appdata:///roaming/backgrounds/$pic " -ForegroundColor Red -BackgroundColor Black
+    Write-Host "`tBackground Picture`t: ( $pic ) " -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tPicture Alignment`t: $align " -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tPicture Stretch`t`t: $stretch " -ForegroundColor Red -BackgroundColor Black
     Write-Host "`tPicture Alpha`t`t: $alpha " -ForegroundColor Red -BackgroundColor Black
@@ -356,7 +356,7 @@ function selectImage() {
 
     $pic        = $backgroundImage[$menuNumber]
     $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
-    
+
     if( $pic -eq "none" ) {
         Write-Host "  Background image will be: none" -ForegroundColor DarkYellow
     } elseif ( Test-Path -Path "$roamingDir\backgrounds" ) {
@@ -515,11 +515,17 @@ function main() {
     $name    = selectProfile    <# Profile #>
     $color   = selectScheme     <# Color Scheme #>
     $pic     = selectImage      <# Background Picture #>
-    $align   = selectAlignment  <# Picture Alignment #>
-    $stretch = selectStretch    <# Picture Stretch #>
 
-    ## Picture Opacity/Transparency
-    $alpha = selectAplha
+    ## Background image settings
+    if ( $pic -ne "none" ) {
+        $align   = selectAlignment  <# Picture Alignment #>
+        $stretch = selectStretch    <# Picture Stretch #>
+        $alpha   = selectAplha      <# Picture Opacity/Transparency #>
+    } else {
+        $align   = "center"
+        $stretch = "none"
+        $alpha   = 0.0
+    }
 
     Write-Host "`n:::::::::::::::::::::::::"
     Write-Host ":: Confirmation Preview"
