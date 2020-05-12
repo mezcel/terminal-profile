@@ -21,7 +21,11 @@
     * The ```.bat``` script works out of the box on anyone's Win10 machine
     * The ```.ps1``` requires user permissions enabled within Powershell.
         ```ps1
+        ## option 1: set permission in script x86 x64
         Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+        ## option 2: set permissions through x64 developer settings
+        Start-Process "ms-settings:developers"
         ```
 
 ### 2.2 Manual Install ( drag-n-drop )
