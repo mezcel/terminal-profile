@@ -62,7 +62,7 @@ function setSchemeArray() {
 }
 
 function setImageArray() {
-	$outputArray = @()
+	$outputArray = @( "none" )
 
     ## list of available .png images within the "backgrounds folder"
     $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
@@ -200,17 +200,22 @@ function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackg
         $mySettings = Get-Content "$settingsLocal" -raw | ConvertFrom-Json
     } catch { knownParsingError }
     
-    $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
-    if ( Test-Path -Path "$roamingDir\backgrounds" ) {
-        $appPath = "ms-appdata:///roaming/backgrounds"
+    if ( $MyBackgroundImage -eq "none" ) {
+        $pic = ""
     } else {
-        $appPath = "ms-appdata:///roaming"
+        $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
+        if ( Test-Path -Path "$roamingDir\backgrounds" ) {
+            $appPath = "ms-appdata:///roaming/backgrounds"
+        } else {
+            $appPath = "ms-appdata:///roaming"
+        }
+        $pic = "$appPath/$MyBackgroundImage"
     }
 
 	$mySettings.profiles.list | % {
 			if( $_.name -eq $MyName ) {
 				$_.colorscheme                = $MyColorscheme
-				$_.backgroundImage            = "$appPath/$MyBackgroundImage"
+				$_.backgroundImage            = $pic
 				$_.backgroundImageAlignment   = $MyBackgroundImageAlignment
 				$_.backgroundImageStretchMode = $MyBackgroundImageStretchMode
 				$_.backgroundImageOpacity     = $MyBackgroundImageOpacity
@@ -348,10 +353,13 @@ function selectImage() {
     Write-Host "Select a number between [ 0 - $arrLen ] "
     $menuNumber = Read-Host "Enter number"
     $menuNumber = correctNumRange $menuNumber 0 $arrLen 0
-    $pic        = $backgroundImage[$menuNumber]
 
+    $pic        = $backgroundImage[$menuNumber]
     $roamingDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
-    if ( Test-Path -Path "$roamingDir\backgrounds" ) {
+    
+    if( $pic -eq "none" ) {
+        Write-Host "  Background image will be: none" -ForegroundColor DarkYellow
+    } elseif ( Test-Path -Path "$roamingDir\backgrounds" ) {
         Write-Host "  Background image will be:`n`tms-appdata:///roaming/backgrounds/$pic`n" -ForegroundColor DarkYellow
     } else {
         Write-Host "  Background image will be:`n`tms-appdata:///roaming/$pic`n" -ForegroundColor DarkYellow
