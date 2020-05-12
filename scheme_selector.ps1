@@ -179,12 +179,16 @@ function remBackupSettings() {
     Write-Host "Done.`nBackup files were removed from:`n`t$destination`n" -ForegroundColor Green
     Start-Sleep 1
 
-    ## Manually Edit settings.json in notepad
-    # notepad $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
-    ## Manually Manage Backup files in windows explorer
-    # explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
-    ## Manually Manage Backup dirs in windows explorer
-    # explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe
+    <#
+        ## Manually Edit settings.json in notepad
+        notepad $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+
+        ## Manually Manage Backup files in windows explorer
+        explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
+
+        ## Manually Manage Backup dirs in windows explorer
+        explorer $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe
+    #>
 }
 
 function writeProfile( [string]$MyName, [string]$MyColorscheme, [string]$MyBackgroundImage, 
@@ -324,7 +328,7 @@ function selectScheme() {
 
     Write-Host "`nSelect an existing color scheme to apply to profile" -ForegroundColor Cyan
     Write-Host "Installed Color Schemes:" -ForegroundColor Yellow
-    $colWidth   = 24
+    $colWidth   = 22
     $colNo      = 2
     displayList $colorSchemes $colWidth $colNo
     $arrLen     = $colorSchemes.length - 1
@@ -345,7 +349,7 @@ function selectImage() {
 
     Write-Host "`nSelect an existing picture to apply to scheme" -ForegroundColor Cyan
     Write-Host "Available Background Images:" -ForegroundColor Yellow
-    $colWidth   = 24
+    $colWidth   = 33
     $colNo      = 2
     displayList $backgroundImage $colWidth $colNo
     Write-Host "`n"
