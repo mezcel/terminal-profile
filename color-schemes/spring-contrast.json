@@ -1,0 +1,22 @@
+{
+    "name":  "Spring Contrast",
+    "black":  "#000000",
+    "red":  "#ff4d83",
+    "green":  "#00661a",
+    "yellow":  "#11c751",
+    "blue":  "#0092ac",
+    "purple":  "#8959a8",
+    "cyan":  "#3e999f",
+    "white":  "#bbc2cc",
+    "brightBlack":  "#41414b",
+    "brightRed":  "#ff0021",
+    "brightGreen":  "#408849",
+    "brightYellow":  "#c9ae00",
+    "brightBlue":  "#87afc7",
+    "brightPurple":  "#8959a8",
+    "brightCyan":  "#3e999f",
+    "brightWhite":  "#d3d9e2",
+    "background":  "#f5fff6",
+    "foreground":  "#4d4d4c",
+    "cursorColor":  "#ff7b00"
+}
