@@ -52,8 +52,8 @@ function closeWT( [string] $scriptName ) {
 }
 
 ## Copy backgrounds and icons to RoamingState
-function copyGraphics() {
-    $source      = "RoamingState"
+function copyGraphics( [string] $scriptParentDir ) {
+    $source      = "$scriptParentDir\RoamingState"
     $destination = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
 
     if ( Test-Path $destination ) {
@@ -71,8 +71,8 @@ function copyGraphics() {
 }
 
 ## Copy settings.json to LocalState
-function copySettings() {
-    $source      = "LocalState\settings.json"
+function copySettings( [string] $scriptParentDir ) {
+    $source      = "$scriptParentDir\LocalState\settings.json"
     $destination = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
 
     if ( Test-Path $destination ) {
@@ -88,7 +88,7 @@ function copySettings() {
 }
 
 ## Main fun
-function main( [string] $scriptName ) {
+function main( [string] $scriptName, [string] $scriptParentDir ) {
     Write-Host ""
     Write-Host "####################################################### "-BackgroundColor White -ForegroundColor Black
     Write-Host "## terminal-profile                                     "-BackgroundColor White -ForegroundColor Black
@@ -103,21 +103,27 @@ function main( [string] $scriptName ) {
     closeWT $scriptName
 
     Write-Host "`nStep 2. Copy and backup the RoamingState directory." -ForegroundColor Yellow
-    copyGraphics
+    copyGraphics $scriptParentDir
 
     Write-Host "`nStep 3. Copy and backup the settings.json file." -ForegroundColor Yellow
-    copySettings
+    copySettings $scriptParentDir
 }
 
 ################
 ## Run
 ################
 
+$scriptParentDir = split-path -parent $MyInvocation.MyCommand.Definition
 $scriptName = $MyInvocation.MyCommand.Name
-main $scriptName
+
+main $scriptName $scriptParentDir
 
 Write-Host ""
 Write-Host "done." -ForegroundColor Green
 Write-Host "Check: $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe" -ForegroundColor Cyan
 Write-Host "`t\RemoteState and \LocalState" -ForegroundColor Cyan
 Write-Host ""
+
+## Launch Windows Terminal
+Start-Sleep 1
+start wt
