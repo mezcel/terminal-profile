@@ -6,13 +6,21 @@
 
 @ECHO off
 
-ECHO :::::::::::::::::::::::::::::::::::::::::::::::::::::::
-ECHO :: terminal-profile
-ECHO :: by:      mezcel
-ECHO :: git:     https://github.com/mezcel/terminal-profile
-ECHO :: About:   Import customized profile schemes
-ECHO :::::::::::::::::::::::::::::::::::::::::::::::::::::::
-ECHO.
+:setLocalPathVars
+    :: Local Path Vars
+    set thisScriptName=%0
+    set thisScriptParentDir=%~dp0
+
+:greetings
+    ECHO :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    ECHO :: terminal-profile
+    ECHO ::
+    ECHO :: script:  %thisScriptName%
+    ECHO :: by:      mezcel
+    ECHO :: git:     https://github.com/mezcel/terminal-profile
+    ECHO :: About:   Import customized profile schemes
+    ECHO :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    ECHO.
 
 :::: time stamp
 :getTimeStamp
@@ -46,7 +54,7 @@ ECHO :: Step 1. Close any open Windows Terminal sessions.
 :::: copy backgrounds and icons to RoamingState
 ECHO :: Step 2. Copy and backup the RoamingState directory.
 :copyGraphics
-    set sourceRS=".\RoamingState"
+    set sourceRS="%thisScriptParentDir%RoamingState"
     set destinationRS="%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
     set backupRS=%destinationRS%-backup%dt%
 
@@ -62,7 +70,7 @@ ECHO :: Step 2. Copy and backup the RoamingState directory.
 :::: copy settings.json to LocalState
 ECHO :: Step 3. Copy and backup the settings.json file.
 :copySettings
-    set sourceLS=".\LocalState\settings.json"
+    set sourceLS="%thisScriptParentDir%LocalState\settings.json"
     set destinationLS="%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
     set backupLS="%destinationLS%\settings-backup%dt%.json"
 
