@@ -89,23 +89,34 @@ function copySettings( [string] $scriptParentDir ) {
 
 ## Main fun
 function main( [string] $scriptName, [string] $scriptParentDir ) {
+    ## Greetings
     Write-Host ""
-    Write-Host "####################################################### "-BackgroundColor White -ForegroundColor Black
-    Write-Host "## terminal-profile                                     "-BackgroundColor White -ForegroundColor Black
-    Write-Host "## by:      mezcel                                      "-BackgroundColor White -ForegroundColor Black
-    Write-Host "## git:     https://github.com/mezcel/terminal-profile  "-BackgroundColor White -ForegroundColor Black
-    Write-Host "## About:   Import customized profile schemes           "-BackgroundColor White -ForegroundColor Black
-    Write-Host "####################################################### "-BackgroundColor White -ForegroundColor Black
+    Write-Host "####################################################### " -BackgroundColor White -ForegroundColor Black
+    Write-Host "## terminal-profile                                     " -BackgroundColor White -ForegroundColor Black
+    Write-Host "## by:      mezcel                                      " -BackgroundColor White -ForegroundColor Black
+    Write-Host "## git:     https://github.com/mezcel/terminal-profile  " -BackgroundColor White -ForegroundColor Black
+    Write-Host "## About:   Import customized profile schemes           " -BackgroundColor White -ForegroundColor Black
+    Write-Host "####################################################### " -BackgroundColor White -ForegroundColor Black
     Write-Host ""
 
+    $stepCounter = 0
+
+    <#
+    ## Kill WT if open
+    $stepCounter = $stepCounter + 1
     Write-Host "Step 1. Close any open Windows Terminal sessions." -ForegroundColor Yellow
-    #Stop-Process -Name 'WindowsTerminal'
+    Stop-Process -Name 'WindowsTerminal'
     closeWT $scriptName
+    #>
 
-    Write-Host "`nStep 2. Copy and backup the RoamingState directory." -ForegroundColor Yellow
+    ## Backup Copy
+    $stepCounter = $stepCounter + 1
+    Write-Host "`nStep $stepCounter. Copy and backup the RoamingState directory." -ForegroundColor Yellow
     copyGraphics $scriptParentDir
 
-    Write-Host "`nStep 3. Copy and backup the settings.json file." -ForegroundColor Yellow
+    ## Write New Settings
+    $stepCounter = $stepCounter + 1
+    Write-Host "`nStep $stepCounter. Copy and backup the settings.json file." -ForegroundColor Yellow
     copySettings $scriptParentDir
 }
 

@@ -23,14 +23,15 @@
     ECHO :::::::::::::::::::::::::::::::::::::::::::::::::::::::
     ECHO.
 
-:::: time stamp
 :getTimeStamp
+    :::: time stamp
     set dt=%DATE:~0,2%_%TIME:~0,2%_%TIME:~3,2%_%TIME:~6,2%
     set dt=%dt: =0%
 
-:::: close Windows Terminal
-::ECHO :: Step 1. Close any open Windows Terminal sessions.
 :::stopWT
+    :::: close Windows Terminal
+    ::ECHO :: Step 1. Close any open Windows Terminal sessions.
+
     ::::taskkill /IM "WindowsTerminal.exe"
     ::tasklist /fi "imagename eq WindowsTerminal.exe" |find ":" > nul
     ::if errorlevel 1 (
@@ -51,10 +52,11 @@
     ::ECHO :: done.
     ::ECHO.
 
-:::: copy backgrounds and icons to RoamingState
-set /A stepCounter=%stepCounter%+1
-ECHO :: Step %stepCounter%. Copy and backup the RoamingState directory.
 :copyGraphics
+    :::: copy backgrounds and icons to RoamingState
+    set /A stepCounter=%stepCounter%+1
+    ECHO :: Step %stepCounter%. Copy and backup the RoamingState directory.
+
     set sourceRS="%thisScriptParentDir%RoamingState"
     set destinationRS="%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState"
     set backupRS=%destinationRS%-backup%dt%
@@ -68,10 +70,11 @@ ECHO :: Step %stepCounter%. Copy and backup the RoamingState directory.
     ECHO :: done.
     ECHO.
 
-:::: copy settings.json to LocalState
-set /A stepCounter=%stepCounter%+1
-ECHO :: Step %stepCounter%. Copy and backup the settings.json file.
 :copySettings
+    :::: copy settings.json to LocalState
+    set /A stepCounter=%stepCounter%+1
+    ECHO :: Step %stepCounter%. Copy and backup the settings.json file.
+
     set sourceLS="%thisScriptParentDir%LocalState\settings.json"
     set destinationLS="%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
     set backupLS="%destinationLS%\settings-backup%dt%.json"
@@ -84,7 +87,8 @@ ECHO :: Step %stepCounter%. Copy and backup the settings.json file.
     copy %sourceLS% "%destinationLS%\"
     ECHO :: done.
 
-:: Confirmation display
-ECHO :: Check: %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe
-ECHO ::      \RemoteState and \LocalState
-ECHO.
+:done
+    :: Confirmation display
+    ECHO :: Check: %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe
+    ECHO ::      \RemoteState and \LocalState
+    ECHO.
