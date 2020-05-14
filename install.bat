@@ -10,7 +10,7 @@
     :: Local Path Vars
     set thisScriptName=%0
     set thisScriptParentDir=%~dp0
-    set stepCounter=0
+    set /A stepCounter=0
 
 :greetings
     ECHO :::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -52,7 +52,7 @@
     ::ECHO.
 
 :::: copy backgrounds and icons to RoamingState
-set stepCounter=%stepCounter%+1
+set /A stepCounter=%stepCounter%+1
 ECHO :: Step %stepCounter%. Copy and backup the RoamingState directory.
 :copyGraphics
     set sourceRS="%thisScriptParentDir%RoamingState"
@@ -69,7 +69,7 @@ ECHO :: Step %stepCounter%. Copy and backup the RoamingState directory.
     ECHO.
 
 :::: copy settings.json to LocalState
-set stepCounter=%stepCounter%+1
+set /A stepCounter=%stepCounter%+1
 ECHO :: Step %stepCounter%. Copy and backup the settings.json file.
 :copySettings
     set sourceLS="%thisScriptParentDir%LocalState\settings.json"
