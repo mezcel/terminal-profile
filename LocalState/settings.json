@@ -114,14 +114,22 @@
                                       "name":  "Ruby",
                                       "icon":  "ms-appdata:///roaming/icons/ruby.ico",
                                       "commandline":  "C://Ruby26-x64//bin//irb.cmd -rirb//completion",
-                                      "colorScheme":  "Mephiston Red"
+                                      "colorScheme":  "Mephiston Red",
+                                      "backgroundImage":  "ms-appdata:///roaming/backgrounds/ruby.png",
+                                      "backgroundImageAlignment":  "bottomRight",
+                                      "backgroundImageStretchMode":  "none",
+                                      "backgroundImageOpacity":  0.35
                                   },
                                   {
                                       "hidden":  false,
                                       "name":  "Perl",
                                       "icon":  "ms-appdata:///roaming/icons/perl.ico",
                                       "commandline":  "C://Windows//SysWOW64//cmd.exe",
-                                      "colorScheme":  "Soulstone Blue"
+                                      "colorScheme":  "Soulstone Blue",
+                                      "backgroundImage":  "ms-appdata:///roaming/backgrounds/perl.png",
+                                      "backgroundImageAlignment":  "bottomRight",
+                                      "backgroundImageStretchMode":  "none",
+                                      "backgroundImageOpacity":  0.35
                                   },
                                   {
                                       "guid":  "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
