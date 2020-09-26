@@ -1,0 +1,22 @@
+{
+	"name":  "Gensing Green",
+	"black":  "#00F0FF",
+	"red":  "#207142",
+	"green":  "#0B0B84",
+	"yellow":  "#D44F8B",
+	"blue":  "#3C4445",
+	"purple":  "#665C6D",
+	"cyan":  "#C3439E",
+	"white":  "#E669DA",
+	"brightBlack":  "#F849D7",
+	"brightRed":  "#FAB96C",
+	"brightGreen":  "#408849",
+	"brightYellow":  "#B4539F",
+	"brightBlue":  "#FF00F1",
+	"brightPurple":  "#88612C",
+	"brightCyan":  "#3e999f",
+	"brightWhite":  "#CAA1D8",
+	"background":  "#AEFFAE",
+	"foreground":  "#78467C",
+	"cursorColor":  "#0CB1D7"
+}
