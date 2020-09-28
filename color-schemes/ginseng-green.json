@@ -1,5 +1,5 @@
 {
-    "name":  "Gensing Green",
+    "name":  "Ginseng Green",
     "black":  "#00F0FF",
     "red":  "#207142",
     "green":  "#0B0B84",
@@ -9,14 +9,14 @@
     "cyan":  "#00A9FF",
     "white":  "#F271E5",
     "brightBlack":  "#F849D7",
-    "brightRed":  "#FAB96C",
+    "brightRed":  "#FF0098",
     "brightGreen":  "#408849",
     "brightYellow":  "#B4539F",
     "brightBlue":  "#FF00F1",
     "brightPurple":  "#88612C",
     "brightCyan":  "#3e999f",
     "brightWhite":  "#CAA1D8",
-    "background":  "#AEFFAE",
+    "background":  "#9EE7B4",
     "foreground":  "#78467C",
     "cursorColor":  "#0CB1D7"
 }
