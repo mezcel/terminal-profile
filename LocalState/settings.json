@@ -45,6 +45,11 @@
           "backgroundImageOpacity": 0.2,
           "cursorShape": "vintage"
         },
+		{
+			"hidden": false,
+			"name": "PowerShell",
+			"source": "Windows.Terminal.PowershellCore"
+		},
         {
           "hidden": false,
           "name": "PowerShell 7",
@@ -137,6 +142,13 @@
           "backgroundImageStretchMode": "none",
           "backgroundImageOpacity": 0.35
         },
+		{
+			"colorScheme": "Tango Dark",
+			"commandline": "C:/cygwin64/Cygwin.bat",
+			"hidden": false,
+			"icon": "C:/cygwin64/Cygwin.ico",
+			"name": "Cygwin"
+		},
         {
           "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
           "hidden": true,
@@ -495,7 +507,32 @@
                     }
 
                 ],
-    "keybindings":  [
-
-                    ]
+    "actions": 
+		[
+			{
+				"command": 
+				{
+					"action": "copy",
+					"singleLine": false
+				},
+				"keys": "ctrl+c"
+			},
+			{
+				"command": "paste",
+				"keys": "ctrl+v"
+			},
+			{
+				"command": "find",
+				"keys": "ctrl+shift+f"
+			},
+			{
+				"command": 
+				{
+					"action": "splitPane",
+					"split": "auto",
+					"splitMode": "duplicate"
+				},
+				"keys": "alt+shift+d"
+			}
+		]
 }
